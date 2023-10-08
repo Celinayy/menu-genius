@@ -1,0 +1,12 @@
+.content {
+  background-color: rgba(39,39,39);
+  border-bottom: 4px solid #25bdd6;
+  box-shadow: 2px 2px 224px black;
+  /* box-shadow: 0px 0px 800px #25bdd6; */
+}
+
+.vertical-center {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}

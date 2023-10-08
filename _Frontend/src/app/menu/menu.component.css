@@ -1,0 +1,39 @@
+
+/* START gombok formázása */
+
+.content {
+  text-align: center;
+  font-size: 24px;
+  padding-top: 12px;
+}
+
+
+.ul-container {
+  display: flex;
+  width: 250px;
+  height: 40px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.button_menu {
+  outline: 0 !important;
+  border: 0 !important;
+  border-radius: 50%;
+  background-color: transparent;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+  margin: 12px 24px;
+  text-decoration: none;
+}
+
+.button_menu:hover {
+  transform: translateY(-3px);
+  color: #25bdd6;
+}
+
+/* END gombok formázása*/
