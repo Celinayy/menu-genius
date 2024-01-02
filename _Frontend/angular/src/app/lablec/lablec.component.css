@@ -1,0 +1,25 @@
+.content {
+  background-color: rgba(39,39,39);
+  border-top: 4px solid #25bdd6;
+  box-shadow: 2px 2px 224px black;
+  width: 100%;
+  padding: 24px;
+  position: relative;
+}
+
+
+.bottom_logo {
+  height: 48px;
+  display: flex;
+  margin: auto;
+  cursor: pointer;
+  transition: all ease-in-out 0.5s;
+}
+
+.bottom_logo:hover {
+  height: 48px;
+  display: flex;
+  margin: auto;
+  cursor: pointer;
+  transform: translateY(-6px);
+}

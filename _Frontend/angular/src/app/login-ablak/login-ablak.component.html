@@ -1,0 +1,101 @@
+<div class="content">
+  <div class="row vertical-center floating">
+    <div class="col-lg-8 col-xs-12 vertical-line">
+      <div class="login_style login_linkek">
+        <a
+          onclick="document.getElementById('id01').style.display='block'"
+          style="width: auto"
+          >Bejelentkezés</a
+        >
+      </div>
+      <div class="login_style login_linkek">
+        <a
+          onclick="document.getElementById('id02').style.display='block'"
+          style="width: auto"
+          >Regisztráció</a
+        >
+      </div>
+    </div>
+    <div class="col-lg-4 col-xs-12 d-none d-lg-block">
+      <img src="/assets/profile.svg" class="profile_logo" alt="profile" />
+    </div>
+  </div>
+</div>
+
+<!-- előugró rész  bejelentkezés -->
+
+<div id="id01" class="modal">
+  <form class="modal-content animate">
+    <div class="imgcontainer">
+      <span
+        onclick="document.getElementById('id01').style.display='none'"
+        class="button_cancel"
+        >Bezárás</span
+      >
+      <img src="/assets/avatar.svg" alt="Avatar" class="avatar" />
+    </div>
+    <div class="container">
+      <input
+        type="text"
+        name="uname"
+        class="input"
+        placeholder="Felhasználó név"
+      /><br />
+      <input
+        type="text"
+        name="password"
+        class="input"
+        placeholder="Jelszó"
+      /><br />
+      <button class="button" type="submit">Bejelentkezés</button>
+    </div>
+  </form>
+</div>
+
+<!-- előugró rész regisztráció -->
+
+<div id="id02" class="modal">
+  <form class="modal-content animate">
+    <div class="imgcontainer">
+      <span
+        onclick="document.getElementById('id02').style.display='none'"
+        class="button_cancel"
+        >Bezárás</span
+      >
+      <img src="/assets/avatar.svg" alt="Avatar" class="avatar" />
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <input
+            type="text"
+            name="uname"
+            class="input"
+            placeholder="Felhasználó név"
+          />
+          <input
+            type="email"
+            name="password"
+            class="input"
+            placeholder="Email"
+          />
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <input
+            type="password"
+            name="password"
+            class="input"
+            placeholder="Jelszó"
+          />
+          <input
+            type="password"
+            name="password"
+            class="input"
+            placeholder="Jelszó újra"
+          />
+        </div>
+      </div>
+      <button class="button" type="submit">Regisztráció</button>
+    </div>
+  </form>
+</div>

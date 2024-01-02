@@ -1,0 +1,11 @@
+.content {
+  max-width: 256px;
+  max-height: 256px;
+  margin: auto;
+}
+
+.logo {
+  padding-top: 24px;
+  padding-bottom: 12px;
+  cursor: pointer;
+}
