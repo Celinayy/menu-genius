@@ -1,0 +1,121 @@
+.container {
+  padding-top: 72px;
+}
+
+.name_text {
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table_text {
+  color: #25bdd6;
+  font-weight: bold;
+  transition: all ease-in-out 0.5s;
+}
+
+.table_text:hover {
+  color: white;
+  font-weight: bold;
+  transform: translatex(12px);
+  cursor: default;
+}
+
+p {
+  font-size: 24px;
+}
+
+/* checkbox fomázása */
+
+.container_checkbox {
+  cursor: pointer;
+}
+
+.container_checkbox input {
+  display: none;
+}
+
+.container_checkbox svg {
+  overflow: visible;
+}
+
+.path {
+  fill: none;
+  stroke: white;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+  stroke-dasharray: 241 9999999;
+  stroke-dashoffset: 0;
+}
+
+.container_checkbox input:checked ~ svg .path {
+  stroke-dasharray: 70.5096664428711 9999999;
+  stroke-dashoffset: -262.2723388671875;
+}
+
+.text_aszf {
+  padding-left: 12px;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* input fomázása */
+
+
+/* ÁSZF és a checkbox elhelyezése */
+
+.checkbox_and_text {
+  padding: 12px 0px;
+}
+
+/* button formázása */
+
+
+
+/* textarea formázása */
+
+textarea {
+  outline: 0 !important;
+  border: 0 !important;
+  border-radius: 12px;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  transition: all ease-in-out 0.1s;
+  cursor: pointer;
+  margin-top: 12px;
+  padding: 12px;
+}
+
+textarea:active {
+  transform: scale(0.95);
+}
+
+
+/* animált beúszás balról */
+
+.floating_from_left {
+  animation-name: floating_left;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes floating_left {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0%); }
+}
+
+/* animált beúszás jobbról */
+
+.floating_from_right {
+  animation-name: floating_right;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes floating_right {
+  0% { transform: translateX(200%); }
+  100% { transform: translateX(0%); }
+}
+

@@ -1,0 +1,36 @@
+.content {
+  margin: 24px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+}
+
+#table_text_style {
+  color: white;
+  font-weight: bold;
+  font-size: 64px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.button {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline: 0 !important;
+  border: 0 !important;
+  background-color: #25bdd6;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all ease-in-out 0.1s;
+  cursor: pointer;
+  margin-top: 12px;
+  font-size: 32px;
+  padding: 12px 24px;
+}
+
+.button:hover {
+  transform: scale(0.95);
+  background-color: transparent;
+  color: white;
+}

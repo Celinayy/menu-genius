@@ -1,0 +1,33 @@
+.content {
+  color: grey;
+}
+
+.contact_style:hover {
+  color: #25bdd6;
+  cursor: default;
+}
+
+.telefon_logo{
+  max-height:48px;
+}
+
+.vertical-line {
+  border-right: 1px solid grey;
+  text-align: right;
+}
+
+/* fel-le animáció */
+
+.floating {
+  animation-name: floating;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes floating {
+  0% { transform: translate(0,  0px); }
+  50% { transform: translate(0, -12px); }
+  100% { transform: translate(0,  0px); }
+}
+

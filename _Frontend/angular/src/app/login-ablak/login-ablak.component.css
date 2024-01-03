@@ -1,0 +1,113 @@
+.content {
+  color: grey;
+}
+
+.login_style {
+  text-align: right;
+}
+
+.login_style:hover {
+  color: #25bdd6;
+  cursor: default;
+}
+
+.profile_logo {
+  height: 48px;
+}
+
+.vertical-line {
+  border-right: 1px solid grey;
+}
+
+.button_cancel {
+  position: absolute;
+  font-size: 18px;
+  top: 0;
+  right: 0;
+  padding: 4px;
+  margin: 4px;
+}
+
+
+/* fel-le animáció */
+
+.floating {
+  animation-name: floating;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes floating {
+  0% { transform: translate(0, 0px); }
+  50% {transform: translate(0, -12px);}
+  100% { transform: translate(0, 0px); }
+}
+
+
+/* az svg-re érvényesülő formázások */
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px;
+  position: relative;
+}
+
+.avatar {
+  width: 40%;
+}
+
+.container {
+  padding: 24px;
+}
+
+/* háttérre érvényesülő formázások */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding-top: 60px;
+  text-align: center;
+}
+
+/* az előugró részre érvényesülő formázások */
+
+.modal-content {
+  background-color: rgba(39, 39, 39, 0.8);
+  margin: 5% auto 10% auto;
+  box-shadow: 2px 2px 1024px #25bdd6;
+  border: none;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* "ZOOM" animációért felel */
+
+.animate {
+  animation: animatezoom 0.6s;
+}
+
+@keyframes animatezoom {
+  from { transform: scale(0); }
+  to { transform: scale(1);}
+}
+
+
+.login_linkek {
+  text-align: right;
+}
+
+@media screen and (max-width: 600px) {
+  .login_linkek {
+    text-align: center;
+    padding-bottom: 12px;
+  }
+}
+

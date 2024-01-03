@@ -1,0 +1,93 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  color: white !important;
+  overflow-x: hidden;
+
+}
+
+body {
+  background: url('assets/hatter3.jpg') no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(2px);
+}
+
+
+/* összes input */
+
+.input {
+  width: 100%;
+  max-width: 220px;
+  height: 45px;
+  padding: 12px;
+  margin-bottom: 6px;
+  border-radius: 12px;
+  border: 1.5px solid lightgrey;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.input:hover {
+  border: 2px solid lightgrey;
+  box-shadow: 0px 0px 20px -17px;
+}
+
+.input:active {
+  transform: scale(0.95);
+}
+
+.input:focus {
+  border: 2px solid #25bdd6;
+}
+
+/* összes gomb */
+
+.button {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline: 0 !important;
+  border: 0 !important;
+  background-color: #25bdd6;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all ease-in-out 0.1s;
+  cursor: pointer;
+  margin-top: 12px;
+  font-size: 24px;
+  padding: 12px 24px;
+}
+
+.button:hover {
+  transform: scale(0.95);
+  background-color: transparent;
+  color: white;
+}
+
+.button_cancel {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline: 0 !important;
+  border: 0 !important;
+  background-color: red;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all ease-in-out 0.1s;
+  cursor: pointer;
+  margin-top: 12px;
+  font-size: 24px;
+  padding: 12px 24px;
+}
+
+.button_cancel:hover {
+  transform: scale(1.1);
+  background-color: transparent;
+  color: white;
+}
+
