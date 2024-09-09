@@ -3,6 +3,7 @@ import {
   LogoutOutlined,
   MenuOutlined,
   SettingsRounded,
+  ShoppingCart,
   StarOutline,
 } from "@mui/icons-material";
 import {
@@ -108,6 +109,13 @@ const HeaderComponent = () => {
                       }
                       label="Sötét mód"
                     />
+                  </MenuItem>
+                  <MenuItem
+                    sx={{ justifyContent: "space-between" }}
+                    onClick={() => router.push("/favorites")}
+                  >
+                    <Typography>Kosár</Typography>
+                    <ShoppingCart />
                   </MenuItem>
                   <MenuItem
                     sx={{ justifyContent: "space-between" }}
