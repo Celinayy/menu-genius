@@ -1,3 +1,4 @@
+import HeaderComponent from "@/components/HeaderComponent";
 import ProductListItem from "@/components/ProductListItem";
 import { trpc } from "@/trpc/client";
 import { Card, Container, Stack } from "@mui/material";
@@ -7,6 +8,7 @@ const ProductsPage = () => {
 
   return (
     <Container>
+      <HeaderComponent />
       <Stack spacing={2}>
         {data?.map((product) => (
           <Card

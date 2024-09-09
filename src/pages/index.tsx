@@ -31,7 +31,12 @@ export default function Home() {
                 labore natus quas vitae sed repellat cupi
               </Typography>
               <Stack direction={"column"} spacing={2}>
-                <Button variant="contained">Regisztráció</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => router.push("/auth/register")}
+                >
+                  Regisztráció
+                </Button>
                 <Button
                   variant="contained"
                   onClick={() => router.push("/auth/login")}
