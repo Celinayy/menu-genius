@@ -8,6 +8,7 @@ import {
   Stack,
   Typography,
   Grid2 as Grid,
+  Box,
 } from "@mui/material";
 import { useRouter } from "next/router";
 
@@ -16,9 +17,15 @@ export default function Home() {
   return (
     <Container>
       <HeaderComponent />
-      <Typography variant="h4" textAlign={"center"}>
-        MenuGenius
-      </Typography>
+      <Box display={"flex"} justifyContent={"center"}>
+        <Typography
+          textAlign={"center"}
+          variant="caption"
+          sx={{ fontSize: "36px" }}
+        >
+          MenuGenius
+        </Typography>
+      </Box>
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>

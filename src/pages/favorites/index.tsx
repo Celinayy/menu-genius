@@ -1,10 +1,23 @@
 import HeaderComponent from "@/components/HeaderComponent";
-import { Card, CardContent, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Container,
+  Divider,
+  Typography,
+} from "@mui/material";
 
 const FavoritesPage = () => {
   return (
     <Container>
       <HeaderComponent />
+      <Box display={"flex"} justifyContent={"center"}>
+        <Typography variant="caption" sx={{ fontSize: "36px" }}>
+          Kedvenc termékek
+        </Typography>
+      </Box>
+      <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
       <Card>
         <CardContent>
           <Typography>

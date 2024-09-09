@@ -112,7 +112,7 @@ const HeaderComponent = () => {
                   </MenuItem>
                   <MenuItem
                     sx={{ justifyContent: "space-between" }}
-                    onClick={() => router.push("/favorites")}
+                    onClick={() => router.push("/cart")}
                   >
                     <Typography>Kosár</Typography>
                     <ShoppingCart />
