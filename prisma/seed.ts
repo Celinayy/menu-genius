@@ -19,7 +19,7 @@ export const seed = async () => {
       data: {
         name: faker.food.dish(),
         price: faker.number.int({
-          min: -100,
+          min: 5,
           max: 100,
         }),
         isFood: faker.datatype.boolean(),

@@ -1,5 +1,6 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import { Product } from "@prisma/client";
+import Image from "next/image";
 
 export type ProductListItemProps = {
   product: Product;
@@ -7,11 +8,11 @@ export type ProductListItemProps = {
 
 const ProductListItem = ({ product }: ProductListItemProps) => {
   return (
-    <Card>
-      <CardContent>
-        <Typography>{product.name}</Typography>
-      </CardContent>
-    </Card>
+    <CardContent>
+      <Typography>{product.name}</Typography>
+      <Typography>{product.price} EUR</Typography>
+      <Typography>{product.isFood ? "Food" : "Drink"}</Typography>
+    </CardContent>
   );
 };
 

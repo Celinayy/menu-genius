@@ -1,10 +1,9 @@
 import { trpc } from "@/trpc/client";
-import { router } from "@/trpc/server";
 import {
-  LogoutRounded,
+  LogoutOutlined,
   MenuOutlined,
   SettingsRounded,
-  ShoppingCartOutlined,
+  StarOutline,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -18,7 +17,6 @@ import {
   Menu,
   FormControlLabel,
   Switch,
-  Box,
   Avatar,
 } from "@mui/material";
 import { useRouter } from "next/router";
@@ -113,6 +111,13 @@ const HeaderComponent = () => {
                   </MenuItem>
                   <MenuItem
                     sx={{ justifyContent: "space-between" }}
+                    onClick={() => router.push("/favorites")}
+                  >
+                    <Typography>Kedvenek</Typography>
+                    <StarOutline />
+                  </MenuItem>
+                  <MenuItem
+                    sx={{ justifyContent: "space-between" }}
                     onClick={() => router.push("/settings")}
                   >
                     <Typography>Beállítások</Typography>
@@ -124,7 +129,7 @@ const HeaderComponent = () => {
                     sx={{ justifyContent: "space-between" }}
                   >
                     <Typography>Kijelentkezés</Typography>
-                    <LogoutRounded />
+                    <LogoutOutlined />
                   </MenuItem>
                 </Menu>
               </Stack>
