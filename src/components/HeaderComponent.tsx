@@ -109,7 +109,11 @@ const HeaderComponent = () => {
           </Container>
         </Toolbar>
       </AppBar>
-      <Toolbar sx={{ paddingBottom: "24px" }} />
+      <Toolbar
+        sx={{
+          paddingBottom: "24px",
+        }}
+      />
     </Fragment>
   );
 };
