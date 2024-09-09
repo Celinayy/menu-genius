@@ -18,6 +18,8 @@ import {
   Menu,
   FormControlLabel,
   Switch,
+  Box,
+  Avatar,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -80,6 +82,18 @@ const HeaderComponent = () => {
                   <MenuOutlined fontSize="large" sx={{ color: "white" }} />
                 </Button>
                 <Menu anchorEl={anchorEl} open={openMenu} onClose={handleClose}>
+                  <Stack
+                    direction={"row"}
+                    spacing={2}
+                    sx={{ margin: "16px" }}
+                    justifyContent={"center"}
+                  >
+                    <Avatar sizes="small" />
+                    <Typography alignSelf={"center"}>
+                      Szia {user.name}!
+                    </Typography>
+                  </Stack>
+
                   <MenuItem>
                     <FormControlLabel
                       sx={{ alignItems: "center" }}
