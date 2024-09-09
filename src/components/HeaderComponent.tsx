@@ -14,17 +14,35 @@ import {
   Typography,
   Stack,
   Button,
-  IconButton,
   MenuItem,
   Menu,
+  FormControlLabel,
+  Switch,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Fragment } from "react";
 import LogoutDialog from "./LogoutDialog";
+import { useSnackbar } from "notistack";
 
 const HeaderComponent = () => {
   const { data: user } = trpc.user.find.useQuery();
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { mutate, isLoading } = trpc.user.update.useMutation({
+    onSuccess: () => {
+      enqueueSnackbar("Sikeres mód váltás!", {
+        variant: "success",
+      });
+    },
+    onError: (error) => {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    },
+  });
+
   const router = useRouter();
   const [openLogout, setOpenLogout] = useState(false);
 
@@ -62,6 +80,23 @@ const HeaderComponent = () => {
                   <MenuOutlined fontSize="large" sx={{ color: "white" }} />
                 </Button>
                 <Menu anchorEl={anchorEl} open={openMenu} onClose={handleClose}>
+                  <MenuItem>
+                    <FormControlLabel
+                      sx={{ alignItems: "center" }}
+                      control={
+                        <Switch
+                          disabled={isLoading}
+                          checked={user.darkMode}
+                          onClick={() => {
+                            mutate({
+                              darkMode: !user.darkMode,
+                            });
+                          }}
+                        />
+                      }
+                      label="Sötét mód"
+                    />
+                  </MenuItem>
                   <MenuItem
                     sx={{ justifyContent: "space-between" }}
                     onClick={() => router.push("/settings")}
