@@ -18,12 +18,14 @@ import {
   Menu,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { Fragment } from "react";
+import LogoutDialog from "./LogoutDialog";
 
 const HeaderComponent = () => {
   const { data: user } = trpc.user.find.useQuery();
   const router = useRouter();
+  const [openLogout, setOpenLogout] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -61,6 +63,7 @@ const HeaderComponent = () => {
                 <Menu anchorEl={anchorEl} open={openMenu} onClose={handleClose}>
                   <MenuItem
                     data-testid="open-logout-dialog"
+                    onClick={() => setOpenLogout(true)}
                     sx={{ justifyContent: "space-between" }}
                   >
                     <Typography>Kijelentkezés</Typography>
@@ -72,6 +75,7 @@ const HeaderComponent = () => {
           </Toolbar>
         </AppBar>
         <Toolbar sx={{ paddingBottom: "24px" }} />
+        <LogoutDialog open={openLogout} onClose={() => setOpenLogout(false)} />
       </Fragment>
     );
   }
