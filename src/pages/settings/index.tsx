@@ -114,13 +114,19 @@ const SettingsPage = () => {
                   <Typography variant="caption" sx={{ fontSize: "14px " }}>
                     Jelenlegi email cím
                   </Typography>
-                  <TextField size="small" disabled value={data?.email} />
+                  <TextField
+                    size="small"
+                    type="email"
+                    disabled
+                    value={data?.email}
+                  />
                 </Stack>
                 <Stack>
                   <Typography variant="caption" sx={{ fontSize: "14px " }}>
                     Új email cím
                   </Typography>
                   <TextField
+                    type="email"
                     size="small"
                     disabled={isLoading}
                     value={email}
@@ -132,6 +138,7 @@ const SettingsPage = () => {
                     Új email cím megerősítése
                   </Typography>
                   <TextField
+                    type="email"
                     size="small"
                     disabled={isLoading}
                     value={emailAgain}
@@ -144,6 +151,61 @@ const SettingsPage = () => {
                   onClick={() =>
                     mutate({
                       email: email,
+                    })
+                  }
+                >
+                  Mentés
+                </Button>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid size={{ xs: 12, md: 4 }}>
+          <Card>
+            <CardContent>
+              <Stack direction={"column"} spacing={2}>
+                <Stack>
+                  <Typography variant="caption" sx={{ fontSize: "14px " }}>
+                    Írd be a jelenlegi jelszavad
+                  </Typography>
+                  <TextField
+                    type="password"
+                    size="small"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Stack>
+                <Stack>
+                  <Typography variant="caption" sx={{ fontSize: "14px " }}>
+                    Írd be az új jelszavad
+                  </Typography>
+                  <TextField
+                    type="password"
+                    size="small"
+                    disabled={isLoading}
+                    value={newPassword}
+                    onChange={(e) => setPasswordNew(e.target.value)}
+                  />
+                </Stack>
+                <Stack>
+                  <Typography variant="caption" sx={{ fontSize: "14px " }}>
+                    Írd be az új jelszavad újra
+                  </Typography>
+                  <TextField
+                    type="password"
+                    size="small"
+                    disabled={isLoading}
+                    value={newPasswordAgain}
+                    onChange={(e) => setPasswordNewAgain(e.target.value)}
+                  />
+                </Stack>
+                <Button
+                  variant="contained"
+                  disabled={isLoading || newPassword !== newPasswordAgain}
+                  onClick={() =>
+                    mutate({
+                      currentPassword: password,
+                      password: newPassword,
                     })
                   }
                 >
