@@ -3,6 +3,7 @@ import { router } from "@/trpc/server";
 import {
   LogoutRounded,
   MenuOutlined,
+  SettingsRounded,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import {
@@ -61,6 +62,10 @@ const HeaderComponent = () => {
                   <MenuOutlined fontSize="large" sx={{ color: "white" }} />
                 </Button>
                 <Menu anchorEl={anchorEl} open={openMenu} onClose={handleClose}>
+                  <MenuItem sx={{ justifyContent: "space-between" }}>
+                    <Typography>Beállítások</Typography>
+                    <SettingsRounded />
+                  </MenuItem>
                   <MenuItem
                     data-testid="open-logout-dialog"
                     onClick={() => setOpenLogout(true)}
