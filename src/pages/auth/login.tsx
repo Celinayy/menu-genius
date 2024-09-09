@@ -53,7 +53,7 @@ const LoginPage = () => {
       <Stack direction={"column"} spacing={2} alignItems={"center"}>
         <Typography variant="h4">Bejelentkezés</Typography>
         <TextField
-          placeholder="Email cím"
+          label="Email cím"
           type={"email"}
           fullWidth
           value={email}
@@ -61,7 +61,7 @@ const LoginPage = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
-          placeholder="Jelszó"
+          label="Jelszó"
           type={"password"}
           fullWidth
           value={password}
@@ -69,7 +69,6 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button
-          data-testid="login-button"
           fullWidth
           variant="contained"
           disabled={isLoading}

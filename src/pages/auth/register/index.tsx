@@ -53,14 +53,14 @@ const RegisterPage = () => {
         <Typography variant="h4">Regisztráció</Typography>
         <TextField
           fullWidth
-          placeholder="Név"
+          label="Név"
           value={name}
           disabled={isLoading}
           onChange={(e) => setName(e.target.value)}
         />
         <TextField
           fullWidth
-          placeholder="Email cím"
+          label="Email cím"
           type={"email"}
           value={email}
           disabled={isLoading}
@@ -68,14 +68,13 @@ const RegisterPage = () => {
         />
         <TextField
           fullWidth
-          placeholder="Jelszó"
+          label="Jelszó"
           type={"password"}
           value={password}
           disabled={isLoading}
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button
-          data-testid="register-button"
           fullWidth
           variant="contained"
           disabled={isLoading}

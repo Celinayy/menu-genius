@@ -62,7 +62,10 @@ const HeaderComponent = () => {
                   <MenuOutlined fontSize="large" sx={{ color: "white" }} />
                 </Button>
                 <Menu anchorEl={anchorEl} open={openMenu} onClose={handleClose}>
-                  <MenuItem sx={{ justifyContent: "space-between" }}>
+                  <MenuItem
+                    sx={{ justifyContent: "space-between" }}
+                    onClick={() => router.push("/settings")}
+                  >
                     <Typography>Beállítások</Typography>
                     <SettingsRounded />
                   </MenuItem>
