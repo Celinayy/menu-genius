@@ -1,0 +1,93 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Allergen {
+    id String @id @default(uuid())
+
+    name String
+}
+
+model Category {
+    id String @id @default(uuid())
+
+    name String
+}
+
+model Desk {
+    id String @id @default(uuid())
+
+    numberOfSeats Int
+
+    purchases Purchase[]
+}
+
+model Image {
+    id        String @id @default(uuid())
+    imageName String
+}
+
+model Ingredient {
+    id String @id @default(uuid())
+
+    amount Int
+}
+
+model Product {
+    id     String  @id @default(uuid())
+    name   String
+    price  Int
+    isFood Boolean
+}
+
+model Purchase {
+    id       String @id @default(uuid())
+    totalPay Int
+
+    status Status @default(ORDERED)
+
+    deskId String
+    userId String
+
+    user User @relation(fields: [userId], references: [id])
+    desk Desk @relation(fields: [deskId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Reservation {
+    id String @id @default(uuid())
+
+    name           String
+    phone          String
+    numberOfGuests Int
+    comment        String
+
+    checkInDate  DateTime @default(now()) @map("check_in_date")
+    checkOutDate DateTime @map("check_out_date")
+}
+
+model User {
+    id       String  @id @default(uuid())
+    name     String
+    email    String  @unique
+    password String
+    phone    String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    purchases Purchase[]
+}
+
+enum Status {
+    ORDERED
+    COOKED
+    SERVED
+}
