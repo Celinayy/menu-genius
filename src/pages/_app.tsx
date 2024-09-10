@@ -8,7 +8,7 @@ import "@/styles/global.css";
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </ThemeProvider>
   );
 };

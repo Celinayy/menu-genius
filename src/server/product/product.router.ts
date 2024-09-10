@@ -9,10 +9,14 @@ export const productRouter = router({
     .query(async (opts) => {
       return await prisma.product.findMany({
         where: {
+          name: {
+            contains: opts.input.search?.name,
+            mode: "insensitive",
+          },
           ingredients:
             opts.input.ingredientIds.length > 0
               ? {
-                  every: {
+                  some: {
                     id: {
                       in: opts.input.ingredientIds,
                     },
@@ -24,6 +28,7 @@ export const productRouter = router({
           image: true,
           ingredients: true,
           allergens: true,
+          favorites: true,
         },
       });
     }),
