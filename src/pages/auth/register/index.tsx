@@ -1,3 +1,5 @@
+import HeaderComponent from "@/components/HeaderComponent";
+import { trpc } from "@/trpc/client";
 import {
   Box,
   Button,
@@ -7,21 +9,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import router from "next/router";
 import { useSnackbar } from "notistack";
-import { trpc } from "@/trpc/client";
-import { useRouter } from "next/router";
 import { useState } from "react";
-import HeaderComponent from "@/components/HeaderComponent";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const { mutate, isLoading } = trpc.auth.login.useMutation({
-    onSuccess: (response) => {
-      localStorage.setItem("accessToken", response.accessToken);
-      enqueueSnackbar("Sikeres bejelentkezés!", {
+  const { mutate, isLoading } = trpc.user.create.useMutation({
+    onSuccess: () => {
+      enqueueSnackbar("Sikeres regisztráció!", {
         variant: "success",
       });
-      router.push(`/`);
+      router.push(`/auth/login`);
     },
     onError: (error) => {
       enqueueSnackbar(error.message, {
@@ -30,7 +29,7 @@ const LoginPage = () => {
     },
   });
 
-  const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -51,19 +50,26 @@ const LoginPage = () => {
     <Container>
       <HeaderComponent />
       <Stack direction={"column"} spacing={2} alignItems={"center"}>
-        <Typography variant="h4">Bejelentkezés</Typography>
+        <Typography variant="h4">Regisztráció</Typography>
         <TextField
+          fullWidth
+          label="Név"
+          value={name}
+          disabled={isLoading}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <TextField
+          fullWidth
           label="Email cím"
           type={"email"}
-          fullWidth
           value={email}
           disabled={isLoading}
           onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
+          fullWidth
           label="Jelszó"
           type={"password"}
-          fullWidth
           value={password}
           disabled={isLoading}
           onChange={(e) => setPassword(e.target.value)}
@@ -74,16 +80,17 @@ const LoginPage = () => {
           disabled={isLoading}
           onClick={() =>
             mutate({
+              name,
               email,
               password,
             })
           }
         >
-          Bejelentkezés
+          Regisztráció
         </Button>
       </Stack>
     </Container>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

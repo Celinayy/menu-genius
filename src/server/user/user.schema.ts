@@ -13,6 +13,7 @@ export const UpdateUserPayloadSchema = z
     email: z.string().email(),
     password: z.string().min(1),
     currentPassword: z.string().min(1),
+    darkMode: z.boolean(),
   })
   .partial();
 
