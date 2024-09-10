@@ -8,6 +8,8 @@ export const productRouter = router({
     return await prisma.product.findMany({
       include: {
         image: true,
+        ingredients: true,
+        allergens: true,
       },
     });
   }),

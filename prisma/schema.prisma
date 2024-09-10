@@ -10,7 +10,8 @@ datasource db {
 model Allergen {
     id String @id @default(uuid())
 
-    name String
+    name     String
+    products Product[]
 }
 
 model Category {
@@ -38,20 +39,21 @@ model Image {
 }
 
 model Ingredient {
-    id String @id @default(uuid())
-
-    amount Int
+    id       String    @id @default(uuid())
+    name     String
+    products Product[]
 }
 
 model Product {
-    id        String     @id @default(uuid())
-    name      String
-    price     Int
-    isFood    Boolean
-    image     Image      @relation(fields: [imageId], references: [id])
-    favorites Favorite[]
-
-    imageId String @unique
+    id          String       @id @default(uuid())
+    name        String
+    price       Int
+    isFood      Boolean
+    image       Image        @relation(fields: [imageId], references: [id])
+    favorites   Favorite[]
+    ingredients Ingredient[]
+    imageId     String       @unique
+    allergens   Allergen[]
 }
 
 model Favorite {

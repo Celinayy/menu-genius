@@ -34,6 +34,16 @@ export const seed = async () => {
             width: 256,
           },
         },
+        allergens: {
+          create: {
+            name: faker.food.ethnicCategory(),
+          },
+        },
+        ingredients: {
+          create: {
+            name: faker.food.ingredient(),
+          },
+        },
       },
     });
   }
