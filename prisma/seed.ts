@@ -23,6 +23,7 @@ export const seed = async () => {
           max: 100,
         }),
         isFood: faker.datatype.boolean(),
+        isFavorite: faker.datatype.boolean(),
       },
     });
   }

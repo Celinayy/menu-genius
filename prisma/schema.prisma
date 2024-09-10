@@ -39,10 +39,11 @@ model Ingredient {
 }
 
 model Product {
-    id     String  @id @default(uuid())
-    name   String
-    price  Int
-    isFood Boolean
+    id         String  @id @default(uuid())
+    name       String
+    price      Int
+    isFood     Boolean
+    isFavorite Boolean
 }
 
 model Purchase {
