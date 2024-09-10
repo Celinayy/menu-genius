@@ -9,6 +9,7 @@ import {
   Grid2 as Grid,
   Typography,
 } from "@mui/material";
+import color from "color";
 
 const ProductsPage = () => {
   const { data } = trpc.product.list.useQuery({});
@@ -29,10 +30,12 @@ const ProductsPage = () => {
             <Card
               variant={"outlined"}
               key={`product-list-item-${product.id}`}
-              sx={{
+              sx={(theme) => ({
                 padding: "8px",
-                backgroundColor: "rgba(0, 0,0, 0.7)",
-              }}
+                backgroundColor: color(theme.palette.background.paper)
+                  .alpha(0.7)
+                  .toString(),
+              })}
             >
               <ProductListItem product={product} />
             </Card>
