@@ -3,6 +3,8 @@ import { trpc } from "@/trpc/client";
 import React from "react";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 
+import "@/styles/global.css";
+
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider>

@@ -6,7 +6,7 @@ import {
   Card,
   Container,
   Divider,
-  Stack,
+  Grid2 as Grid,
   Typography,
 } from "@mui/material";
 
@@ -23,17 +23,22 @@ const ProductsPage = () => {
       </Box>
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
 
-      <Stack spacing={2}>
+      <Grid container spacing={2}>
         {data?.map((product) => (
-          <Card
-            variant={"outlined"}
-            key={`product-list-item-${product.id}`}
-            sx={{ padding: "8px" }}
-          >
-            <ProductListItem product={product} />
-          </Card>
+          <Grid size={{ xs: 6, md: 4 }}>
+            <Card
+              variant={"outlined"}
+              key={`product-list-item-${product.id}`}
+              sx={{
+                padding: "8px",
+                backgroundColor: "rgba(0, 0,0, 0.7)",
+              }}
+            >
+              <ProductListItem product={product} />
+            </Card>
+          </Grid>
         ))}
-      </Stack>
+      </Grid>
     </Container>
   );
 };

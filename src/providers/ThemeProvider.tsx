@@ -18,7 +18,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
         palette: {
           mode: user?.darkMode ? "dark" : "light",
           primary: {
-            main: "#322529",
+            main: "#6b3a20",
           },
         },
         components: {

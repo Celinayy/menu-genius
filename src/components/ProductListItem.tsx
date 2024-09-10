@@ -1,21 +1,42 @@
 import { StarRounded } from "@mui/icons-material";
-import { Card, CardContent, IconButton, Typography } from "@mui/material";
-import { Product } from "@prisma/client";
-import Image from "next/image";
+import {
+  Box,
+  CardContent,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { Image, Product } from "@prisma/client";
+import NextImage from "next/image";
 
 export type ProductListItemProps = {
-  product: Product;
+  product: Product & {
+    image: Image;
+  };
 };
 
 const ProductListItem = ({ product }: ProductListItemProps) => {
   return (
     <CardContent>
-      <Typography>{product.name}</Typography>
-      <Typography>{product.price} EUR</Typography>
-      <Typography>{product.isFood ? "Food" : "Drink"}</Typography>
-      <IconButton>
-        <StarRounded />
-      </IconButton>
+      <Box display={"flex"} justifyContent={"center"}>
+        <NextImage
+          src={product.image.data}
+          alt={product.name}
+          width={product.image.width}
+          height={product.image.height}
+        />
+      </Box>
+      <Divider sx={{ margin: "12px" }} />
+      <Stack direction={"row"} justifyContent={"space-between"}>
+        <Stack direction={"column"}>
+          <Typography>{product.name}</Typography>
+          <Typography>{product.price} EUR</Typography>
+        </Stack>
+        <IconButton>
+          <StarRounded />
+        </IconButton>
+      </Stack>
     </CardContent>
   );
 };

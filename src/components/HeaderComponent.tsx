@@ -2,6 +2,8 @@ import { trpc } from "@/trpc/client";
 import {
   LogoutOutlined,
   MenuOutlined,
+  ProductionQuantityLimitsRounded,
+  RestaurantOutlined,
   SettingsRounded,
   ShoppingCart,
   StarOutline,
@@ -109,6 +111,13 @@ const HeaderComponent = () => {
                       }
                       label="Sötét mód"
                     />
+                  </MenuItem>
+                  <MenuItem
+                    sx={{ justifyContent: "space-between" }}
+                    onClick={() => router.push("/products")}
+                  >
+                    <Typography>Kínálat</Typography>
+                    <RestaurantOutlined />
                   </MenuItem>
                   <MenuItem
                     sx={{ justifyContent: "space-between" }}
