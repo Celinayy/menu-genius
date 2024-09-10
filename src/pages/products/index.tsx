@@ -1,4 +1,5 @@
 import HeaderComponent from "@/components/HeaderComponent";
+import IngredientSelect from "@/components/IngredientSelect";
 import ProductListItem from "@/components/ProductListItem";
 import { trpc } from "@/trpc/client";
 import {
@@ -10,9 +11,12 @@ import {
   Typography,
 } from "@mui/material";
 import color from "color";
+import { useMemo, useState } from "react";
 
 const ProductsPage = () => {
-  const { data } = trpc.product.list.useQuery({});
+  const [ingredientIds, setIngredientIds] = useState<string[]>([]);
+
+  const { data } = trpc.product.list.useQuery({ ingredientIds });
 
   return (
     <Container>
@@ -23,7 +27,15 @@ const ProductsPage = () => {
         </Typography>
       </Box>
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
-
+      <IngredientSelect
+        sx={{ marginBottom: "24px" }}
+        value={ingredientIds}
+        onChange={(e) =>
+          setIngredientIds(
+            Array.isArray(e.target.value) ? e.target.value : [e.target.value]
+          )
+        }
+      />
       <Grid container spacing={2}>
         {data?.map((product) => (
           <Grid size={{ xs: 6, md: 4 }}>

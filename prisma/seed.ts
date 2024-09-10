@@ -15,6 +15,20 @@ export const seed = async () => {
     },
   });
 
+  const ingredients = await prisma.ingredient.createManyAndReturn({
+    data: faker.helpers
+      .uniqueArray(
+        faker.food.ingredient,
+        faker.number.int({
+          min: 20,
+          max: 40,
+        })
+      )
+      .map((ingredientName) => ({
+        name: ingredientName,
+      })),
+  });
+
   for (let i = 0; i < 24; i++) {
     const foodName = faker.food.dish();
 
@@ -40,9 +54,14 @@ export const seed = async () => {
           },
         },
         ingredients: {
-          create: {
-            name: faker.food.ingredient(),
-          },
+          connect: faker.helpers
+            .arrayElements(ingredients, {
+              min: 1,
+              max: 5,
+            })
+            .map((ingredient) => ({
+              id: ingredient.id,
+            })),
         },
       },
     });
