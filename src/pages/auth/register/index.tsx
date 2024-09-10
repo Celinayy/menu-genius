@@ -5,6 +5,7 @@ import {
   Button,
   CircularProgress,
   Container,
+  Divider,
   Stack,
   TextField,
   Typography,
@@ -49,8 +50,13 @@ const RegisterPage = () => {
   return (
     <Container>
       <HeaderComponent />
+      <Box display={"flex"} justifyContent={"center"}>
+        <Typography variant="caption" sx={{ fontSize: "36px" }}>
+          Regisztráció
+        </Typography>
+      </Box>
+      <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
       <Stack direction={"column"} spacing={2} alignItems={"center"}>
-        <Typography variant="h4">Regisztráció</Typography>
         <TextField
           fullWidth
           label="Név"

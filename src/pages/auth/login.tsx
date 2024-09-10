@@ -3,6 +3,7 @@ import {
   Button,
   CircularProgress,
   Container,
+  Divider,
   Stack,
   TextField,
   Typography,
@@ -50,8 +51,13 @@ const LoginPage = () => {
   return (
     <Container>
       <HeaderComponent />
+      <Box display={"flex"} justifyContent={"center"}>
+        <Typography variant="caption" sx={{ fontSize: "36px" }}>
+          Bejelentkezés
+        </Typography>
+      </Box>
+      <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
       <Stack direction={"column"} spacing={2} alignItems={"center"}>
-        <Typography variant="h4">Bejelentkezés</Typography>
         <TextField
           label="Email cím"
           type={"email"}

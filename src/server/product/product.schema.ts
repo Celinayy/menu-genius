@@ -6,4 +6,9 @@ export const FindProductPayloadSchema = z.object({
 
 export const ListProductPayloadSchema = z.object({
   ingredientIds: z.string().uuid().array().optional().default([]),
+  search: z
+    .object({
+      name: z.string(),
+    })
+    .optional(),
 });
