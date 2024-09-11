@@ -97,6 +97,9 @@ model Reservation {
     numberOfGuests Int
     comment        String
 
+    user   User   @relation(fields: [userId], references: [id])
+    userId String
+
     checkInDate  DateTime @default(now()) @map("check_in_date")
     checkOutDate DateTime @map("check_out_date")
 }
@@ -132,10 +135,11 @@ model User {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    purchases Purchase[]
-    favorites Favorite[]
-    cartItems CartItem[]
-    Cart      Cart[]
+    reservations Reservation[]
+    purchases    Purchase[]
+    favorites    Favorite[]
+    cartItems    CartItem[]
+    Cart         Cart[]
 }
 
 enum Status {
