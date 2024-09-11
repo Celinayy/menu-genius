@@ -40,6 +40,7 @@ export const seed = async () => {
           max: 100,
         }),
         isFood: faker.datatype.boolean(),
+        description: faker.food.description(),
         image: {
           create: {
             name: `${slugify(foodName)}.svg`,

@@ -20,6 +20,9 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
           primary: {
             main: "#6b3a20",
           },
+          secondary: {
+            main: "#b45615",
+          },
         },
         components: {
           MuiTextField: {

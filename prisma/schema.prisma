@@ -51,6 +51,7 @@ model Product {
     name        String
     price       Int
     isFood      Boolean
+    description String
     image       Image        @relation(fields: [imageId], references: [id])
     favorites   Favorite[]
     ingredients Ingredient[]
