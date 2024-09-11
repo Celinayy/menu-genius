@@ -26,6 +26,16 @@ export const productRouter = router({
                   },
                 }
               : undefined,
+          allergens:
+            opts.input.allergenIds.length > 0
+              ? {
+                  some: {
+                    id: {
+                      in: opts.input.allergenIds,
+                    },
+                  },
+                }
+              : undefined,
         },
 
         include: {
@@ -36,12 +46,19 @@ export const productRouter = router({
         },
       });
     }),
+
   find: protectedProcedure
     .input(FindProductPayloadSchema)
     .query(async (opts) => {
       return await prisma.product.findUniqueOrThrow({
         where: {
           id: opts.input.productId,
+        },
+        include: {
+          image: true,
+          ingredients: true,
+          allergens: true,
+          favorites: true,
         },
       });
     }),

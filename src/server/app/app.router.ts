@@ -4,12 +4,14 @@ import { authRouter } from "../auth/auth.router";
 import { userRouter } from "../user/user.router";
 import { productRouter } from "../product/product.router";
 import { ingredientRouter } from "../ingredient/ingredient.router";
+import { allergenRouter } from "../allergen/allergen.router";
 
 export const appRouter = router({
   auth: authRouter,
   user: userRouter,
   product: productRouter,
   ingredient: ingredientRouter,
+  allergen: allergenRouter,
 });
 
 export type AppRouter = typeof appRouter;

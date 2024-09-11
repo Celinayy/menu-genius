@@ -29,6 +29,20 @@ export const seed = async () => {
       })),
   });
 
+  const allergens = await prisma.allergen.createManyAndReturn({
+    data: faker.helpers
+      .uniqueArray(
+        faker.food.spice,
+        faker.number.int({
+          min: 20,
+          max: 40,
+        })
+      )
+      .map((allergenName) => ({
+        name: allergenName,
+      })),
+  });
+
   for (let i = 0; i < 24; i++) {
     const foodName = faker.food.dish();
 
@@ -50,9 +64,14 @@ export const seed = async () => {
           },
         },
         allergens: {
-          create: {
-            name: faker.food.ethnicCategory(),
-          },
+          connect: faker.helpers
+            .arrayElements(allergens, {
+              min: 1,
+              max: 5,
+            })
+            .map((allergen) => ({
+              id: allergen.id,
+            })),
         },
         ingredients: {
           connect: faker.helpers
