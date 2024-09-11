@@ -83,6 +83,7 @@ export const seed = async () => {
               id: ingredient.id,
             })),
         },
+        favorites: {},
       },
     });
   }

@@ -1,14 +1,20 @@
 import HeaderComponent from "@/components/HeaderComponent";
+import { trpc } from "@/trpc/client";
 import {
   Box,
   Card,
-  CardContent,
+  Grid2 as Grid,
   Container,
   Divider,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
 
 const FavoritesPage = () => {
+  const router = useRouter();
+  const userId = router.query.userId as string;
+  const { data: user } = trpc.user.find.useQuery();
+
   return (
     <Container>
       <HeaderComponent />
@@ -18,16 +24,24 @@ const FavoritesPage = () => {
         </Typography>
       </Box>
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
-      <Card>
-        <CardContent>
-          <Typography>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-            officiis ratione hic laudantium sed libero, dolorem nostrum,
-            deserunt iusto quaerat voluptate soluta deleniti doloribus quam
-            praesentium in dolor natus quibusdam.
-          </Typography>
-        </CardContent>
-      </Card>
+      <Grid container spacing={2}>
+        <Typography></Typography>
+        {/* <Grid size={{ xs: 6, md: 4 }}>
+          {user?..map(() => (
+            <Grid size={{ xs: 6, md: 4 }}>
+              <Card
+                variant={"outlined"}
+                key={`favorite-list-item-${product.id}`}
+                sx={(theme) => ({
+                  padding: "8px",
+                })}
+              >
+                <Typography></Typography>
+              </Card>
+            </Grid>
+          ))}
+        </Grid> */}
+      </Grid>
     </Container>
   );
 };
