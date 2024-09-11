@@ -1,6 +1,9 @@
 import { protectedProcedure } from "../auth/auth.procedure";
 import { prisma } from "../db/db.client";
-import { ListProductPayloadSchema } from "./product.schema";
+import {
+  FindProductPayloadSchema,
+  ListProductPayloadSchema,
+} from "./product.schema";
 import { router } from "@/trpc/server";
 
 export const productRouter = router({
@@ -24,11 +27,21 @@ export const productRouter = router({
                 }
               : undefined,
         },
+
         include: {
           image: true,
           ingredients: true,
           allergens: true,
           favorites: true,
+        },
+      });
+    }),
+  find: protectedProcedure
+    .input(FindProductPayloadSchema)
+    .query(async (opts) => {
+      return await prisma.product.findUniqueOrThrow({
+        where: {
+          id: opts.input.productId,
         },
       });
     }),
