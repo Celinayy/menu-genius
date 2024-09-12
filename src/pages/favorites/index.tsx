@@ -8,12 +8,12 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 
 const FavoritesPage = () => {
-  const router = useRouter();
-  const userId = router.query.userId as string;
-  const { data: user } = trpc.user.find.useQuery();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { data, isLoading } = trpc.favoritProduct.list.useQuery({});
 
   return (
     <Container>
@@ -26,12 +26,12 @@ const FavoritesPage = () => {
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
       <Grid container spacing={2}>
         <Typography></Typography>
-        {/* <Grid size={{ xs: 6, md: 4 }}>
-          {user?..map(() => (
+        <Grid size={{ xs: 6, md: 4 }}>
+          {data?.favoritProduct.map((favorit) => (
             <Grid size={{ xs: 6, md: 4 }}>
               <Card
                 variant={"outlined"}
-                key={`favorite-list-item-${product.id}`}
+                key={`favorite-list-item-${favorit.id}`}
                 sx={(theme) => ({
                   padding: "8px",
                 })}
@@ -40,7 +40,7 @@ const FavoritesPage = () => {
               </Card>
             </Grid>
           ))}
-        </Grid> */}
+        </Grid>
       </Grid>
     </Container>
   );

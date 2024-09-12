@@ -1,3 +1,4 @@
+import { trpc } from "@/trpc/client";
 import { StarRounded } from "@mui/icons-material";
 import {
   Box,
@@ -11,6 +12,7 @@ import {
 import { Image, Product } from "@prisma/client";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 
 export type ProductListItemProps = {
   product: Product & {
@@ -20,6 +22,20 @@ export type ProductListItemProps = {
 
 const ProductListItem = ({ product }: ProductListItemProps) => {
   const router = useRouter();
+
+  const { enqueueSnackbar } = useSnackbar();
+  const { mutate, isLoading } = trpc.favoritProduct.create.useMutation({
+    onSuccess: () => {
+      enqueueSnackbar("Sikeres kedvencekhez adás!", {
+        variant: "success",
+      });
+    },
+    onError: (error) => {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    },
+  });
 
   return (
     <CardContent>
@@ -38,7 +54,13 @@ const ProductListItem = ({ product }: ProductListItemProps) => {
           <Typography>{product.price} EUR</Typography>
         </Stack>
         <Stack direction={"row"} spacing={1}>
-          <IconButton>
+          <IconButton
+            onClick={() =>
+              mutate({
+                productId: product.id,
+              })
+            }
+          >
             <StarRounded />
           </IconButton>
           <Button
