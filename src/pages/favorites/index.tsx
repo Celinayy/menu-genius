@@ -1,3 +1,5 @@
+import CartListItem from "@/components/CartListItem";
+import FavoritProductListItem from "@/components/FavoritProductListItem";
 import HeaderComponent from "@/components/HeaderComponent";
 import { trpc } from "@/trpc/client";
 import {
@@ -13,7 +15,7 @@ import { useSnackbar } from "notistack";
 const FavoritesPage = () => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { data, isLoading } = trpc.favoritProduct.list.useQuery({});
+  const { data, isLoading } = trpc.favoritProduct.list.useQuery();
 
   return (
     <Container>
@@ -26,8 +28,8 @@ const FavoritesPage = () => {
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
       <Grid container spacing={2}>
         <Typography></Typography>
-        <Grid size={{ xs: 6, md: 4 }}>
-          {data?.favoritProduct.map((favorit) => (
+        <Grid container>
+          {data?.map((favorit) => (
             <Grid size={{ xs: 6, md: 4 }}>
               <Card
                 variant={"outlined"}
@@ -36,7 +38,7 @@ const FavoritesPage = () => {
                   padding: "8px",
                 })}
               >
-                <Typography></Typography>
+                <FavoritProductListItem favorit={favorit} />
               </Card>
             </Grid>
           ))}
