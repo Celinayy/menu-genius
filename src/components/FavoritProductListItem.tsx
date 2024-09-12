@@ -1,3 +1,4 @@
+import { trpc } from "@/trpc/client";
 import {
   Box,
   Button,
@@ -8,6 +9,8 @@ import {
 } from "@mui/material";
 import { Favorite, Image, Product } from "@prisma/client";
 import NextImage from "next/image";
+import { useState } from "react";
+import DeleteFavoriteProductDialog from "./DeleteFavoriteProductDialog";
 
 export type FavoritProductListItemProps = {
   favorit: Favorite & {
@@ -18,6 +21,8 @@ export type FavoritProductListItemProps = {
 };
 
 const FavoritProductListItem = ({ favorit }: FavoritProductListItemProps) => {
+  const [openDeleteFavoritDialog, setOpenDeleteFavoritDialog] = useState(false);
+
   return (
     <CardContent>
       <Stack
@@ -41,11 +46,20 @@ const FavoritProductListItem = ({ favorit }: FavoritProductListItemProps) => {
           />
         </Box>
         <Box display={"flex"} justifyContent={"center"}>
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => setOpenDeleteFavoritDialog(true)}
+          >
             Eltávolítás
           </Button>
         </Box>
       </Stack>
+      <DeleteFavoriteProductDialog
+        favorit={favorit}
+        open={openDeleteFavoritDialog}
+        onClose={() => setOpenDeleteFavoritDialog(false)}
+      />
     </CardContent>
   );
 };

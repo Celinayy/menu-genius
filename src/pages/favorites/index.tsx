@@ -1,4 +1,3 @@
-import CartListItem from "@/components/CartListItem";
 import FavoritProductListItem from "@/components/FavoritProductListItem";
 import HeaderComponent from "@/components/HeaderComponent";
 import { trpc } from "@/trpc/client";
@@ -9,13 +8,35 @@ import {
   Container,
   Divider,
   Typography,
+  Button,
 } from "@mui/material";
-import { useSnackbar } from "notistack";
+import { useRouter } from "next/router";
 
 const FavoritesPage = () => {
-  const { enqueueSnackbar } = useSnackbar();
+  const { data } = trpc.favoritProduct.list.useQuery();
 
-  const { data, isLoading } = trpc.favoritProduct.list.useQuery();
+  const router = useRouter();
+
+  if (data?.length === 0) {
+    return (
+      <Container>
+        <HeaderComponent />
+        <Box display={"flex"} justifyContent={"center"}>
+          <Typography variant="caption" sx={{ fontSize: "36px" }}>
+            Jelenleg nincs kedvenc terméked
+          </Typography>
+        </Box>
+        <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={() => router.push("/products")}
+        >
+          Irány a kínálat!
+        </Button>
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -27,22 +48,19 @@ const FavoritesPage = () => {
       </Box>
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
       <Grid container spacing={2}>
-        <Typography></Typography>
-        <Grid container>
-          {data?.map((favorit) => (
-            <Grid size={{ xs: 6, md: 4 }}>
-              <Card
-                variant={"outlined"}
-                key={`favorite-list-item-${favorit.id}`}
-                sx={(theme) => ({
-                  padding: "8px",
-                })}
-              >
-                <FavoritProductListItem favorit={favorit} />
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        {data?.map((favorit) => (
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Card
+              variant={"outlined"}
+              key={`favorite-list-item-${favorit.id}`}
+              sx={(theme) => ({
+                padding: "8px",
+              })}
+            >
+              <FavoritProductListItem favorit={favorit} />
+            </Card>
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );
