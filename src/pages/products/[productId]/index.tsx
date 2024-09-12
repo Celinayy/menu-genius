@@ -90,7 +90,7 @@ const SingleProductPage = () => {
                         label={allergen.name}
                         onClick={() =>
                           window.open(
-                            `https://hu.wikipedia.org/wiki/${allergen.name}`,
+                            `https://en.wikipedia.org/wiki/${allergen.name}`,
                             "_blank"
                           )
                         }
@@ -106,7 +106,7 @@ const SingleProductPage = () => {
                         label={ingredient.name}
                         onClick={() =>
                           window.open(
-                            `https://hu.wikipedia.org/wiki/${ingredient.name}`,
+                            `https://en.wikipedia.org/wiki/${ingredient.name}`,
                             "_blank"
                           )
                         }

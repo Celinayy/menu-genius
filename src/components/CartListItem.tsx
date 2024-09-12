@@ -21,9 +21,18 @@ export type CartListItemProps = CardProps & {
 
 const CartListItem = ({ cartItem }: CartListItemProps) => (
   <CardContent>
-    <Typography textAlign={"center"} variant="h5">
-      {cartItem.product.name}
-    </Typography>
+    <Stack
+      direction={"row"}
+      alignItems={"center"}
+      justifyContent={"space-between"}
+    >
+      <Typography variant="h5" sx={{}}>
+        {cartItem.product.name}
+      </Typography>
+      <Typography variant="overline" sx={{ fontSize: "18px" }}>
+        {cartItem.product.price} EUR
+      </Typography>
+    </Stack>
     <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
     <Stack direction={"column"} spacing={2}>
       <Box display={"flex"} justifyContent={"center"}>
@@ -38,7 +47,6 @@ const CartListItem = ({ cartItem }: CartListItemProps) => (
         <Button variant="contained" color="error">
           Eltávolítás
         </Button>
-        <Typography>{cartItem.product.price} EUR</Typography>
       </Box>
     </Stack>
   </CardContent>
