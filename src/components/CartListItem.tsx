@@ -38,6 +38,7 @@ const CartListItem = ({ cartItem }: CartListItemProps) => (
         <Button variant="contained" color="error">
           Eltávolítás
         </Button>
+        <Typography>{cartItem.product.price} EUR</Typography>
       </Box>
     </Stack>
   </CardContent>
