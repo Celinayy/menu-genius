@@ -33,4 +33,21 @@ export const cartItemRouter = router({
         cartItem,
       };
     }),
+
+  list: protectedProcedure.query(async (opts) => {
+    return await prisma.cartItem.findMany({
+      where: {
+        cart: {
+          userId: opts.ctx.user.id,
+        },
+      },
+      include: {
+        product: {
+          include: {
+            image: true,
+          },
+        },
+      },
+    });
+  }),
 });
