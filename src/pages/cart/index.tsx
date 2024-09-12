@@ -12,8 +12,10 @@ import {
   CardContent,
   Button,
 } from "@mui/material";
+import { useRouter } from "next/router";
 
 const CartPage = () => {
+  const router = useRouter();
   const { data, isLoading } = trpc.cartItem.list.useQuery();
 
   const totalQuantityDish =
@@ -22,6 +24,29 @@ const CartPage = () => {
   const totalQuantityDrink = (data?.length ?? 0) - totalQuantityDish;
 
   const totalPrice = data?.reduce((prev, cur) => prev + cur.product.price, 0);
+
+  console.log(data?.length);
+
+  if (data?.length === 0) {
+    return (
+      <Container>
+        <HeaderComponent />
+        <Box display={"flex"} justifyContent={"center"}>
+          <Typography variant="caption" sx={{ fontSize: "36px" }}>
+            Jelenleg nincs semmi a kosaradban
+          </Typography>
+        </Box>
+        <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={() => router.push("/products")}
+        >
+          Irány a kínálat!
+        </Button>
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -56,13 +81,13 @@ const CartPage = () => {
               <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
               <Stack direction={"column"} spacing={2}>
                 <Typography variant="overline" sx={{ fontSize: "12px" }}>
-                  Darabszám étel
+                  Étel darabszám
                 </Typography>
-                <Typography>{totalQuantityDish}</Typography>
+                <Typography>{totalQuantityDish} db</Typography>
                 <Typography variant="overline" sx={{ fontSize: "12px" }}>
-                  Darabszám ital
+                  Ital darabszám
                 </Typography>
-                <Typography>{totalQuantityDrink}</Typography>
+                <Typography>{totalQuantityDrink} db</Typography>
                 <Typography variant="overline" sx={{ fontSize: "12px" }}>
                   Fizetendő összeg
                 </Typography>

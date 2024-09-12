@@ -1,3 +1,4 @@
+import { trpc } from "@/trpc/client";
 import {
   Button,
   Dialog,
@@ -9,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { CartItem, Product } from "@prisma/client";
+import { useSnackbar } from "notistack";
 
 export type DeleteCartItemDialogProps = DialogProps & {
   cartItem: CartItem & {
@@ -20,6 +22,22 @@ const DeleteCartItemDialog = ({
   cartItem,
   ...props
 }: DeleteCartItemDialogProps) => {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { mutate, isLoading } = trpc.cartItem.delete.useMutation({
+    onSuccess: () => {
+      props.onClose?.({}, "escapeKeyDown");
+      enqueueSnackbar("Sikeresen eltávolítottad a terméket a kosárból!", {
+        variant: "success",
+      });
+    },
+    onError: (error) => {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    },
+  });
+
   return (
     <Dialog {...props}>
       <DialogTitle textAlign={"center"}>
@@ -39,7 +57,15 @@ const DeleteCartItemDialog = ({
           <Typography variant="h5" textAlign={"center"}>
             {cartItem.product.name}
           </Typography>
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() =>
+              mutate({
+                productId: cartItem.id,
+              })
+            }
+          >
             Eltávolítás
           </Button>
         </Stack>

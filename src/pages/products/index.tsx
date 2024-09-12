@@ -12,7 +12,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import color from "color";
 import { useState } from "react";
 
 const ProductsPage = () => {

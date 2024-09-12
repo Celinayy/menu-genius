@@ -111,10 +111,6 @@ export const seed = async () => {
       .map((product) => ({
         productId: product.id,
         cartId: cart.id,
-        quantity: faker.number.int({
-          min: 1,
-          max: 5,
-        }),
       })),
   });
 };
