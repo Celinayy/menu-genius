@@ -14,11 +14,26 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
+import { useSnackbar } from "notistack";
 
 const SingleProductPage = () => {
   const router = useRouter();
   const productId = router.query.productId as string;
   const { data: product } = trpc.product.find.useQuery({ productId });
+
+  const { enqueueSnackbar } = useSnackbar();
+  const { mutate, isLoading } = trpc.cartItem.create.useMutation({
+    onSuccess: () => {
+      enqueueSnackbar("Sikeresen hozzáadtad a kosárhoz!", {
+        variant: "success",
+      });
+    },
+    onError: (error) => {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    },
+  });
 
   return (
     <Container>
@@ -85,10 +100,24 @@ const SingleProductPage = () => {
                 </Stack>
                 <Typography>{product?.description}</Typography>
                 <Stack direction={"row"} spacing={2}>
-                  <Button variant="contained" fullWidth color="secondary">
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    color="secondary"
+                    disabled={isLoading}
+                  >
                     Vásárlás
                   </Button>
-                  <Button variant="contained" fullWidth>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    disabled={isLoading}
+                    onClick={() =>
+                      mutate({
+                        productId: product!.id,
+                      })
+                    }
+                  >
                     Kosárba
                   </Button>
                 </Stack>

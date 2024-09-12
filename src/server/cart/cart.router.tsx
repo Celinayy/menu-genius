@@ -9,12 +9,12 @@ export const cartRouter = router({
     .mutation(async (opts) => {
       const cart = await prisma.cart.create({
         data: {
-          userId: opts.input.userId,
+          userId: opts.ctx.user.id,
         },
       });
 
       return {
-        message: "Successfully added cart!",
+        message: "Successfully created cart!",
         cart,
       };
     }),
