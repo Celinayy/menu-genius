@@ -102,7 +102,15 @@ const SingleProductPage = () => {
                 <Stack direction={"row"} spacing={1}>
                   {product?.ingredients?.map((ingredient) => (
                     <Stack direction={"row"} justifyContent={"space-between"}>
-                      <Chip label={ingredient.name} />
+                      <Chip
+                        label={ingredient.name}
+                        onClick={() =>
+                          window.open(
+                            `https://hu.wikipedia.org/wiki/${ingredient.name}`,
+                            "_blank"
+                          )
+                        }
+                      />
                     </Stack>
                   ))}
                 </Stack>
