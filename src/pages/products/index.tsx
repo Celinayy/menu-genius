@@ -58,9 +58,6 @@ const ProductsPage = () => {
               key={`product-list-item-${product.id}`}
               sx={(theme) => ({
                 padding: "8px",
-                backgroundColor: color(theme.palette.background.paper)
-                  .alpha(0.7)
-                  .toString(),
               })}
             >
               <ProductListItem product={product} />
