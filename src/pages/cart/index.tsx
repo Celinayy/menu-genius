@@ -16,7 +16,11 @@ import {
 const CartPage = () => {
   const { data, isLoading } = trpc.cartItem.list.useQuery();
 
-  const totalQuantity = data?.length;
+  const totalQuantityDish =
+    data?.filter((cartItem) => cartItem.product.isFood).length ?? 0;
+
+  const totalQuantityDrink = (data?.length ?? 0) - totalQuantityDish;
+
   const totalPrice = data?.reduce((prev, cur) => prev + cur.product.price, 0);
 
   return (
@@ -52,14 +56,20 @@ const CartPage = () => {
               <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
               <Stack direction={"column"} spacing={2}>
                 <Typography variant="overline" sx={{ fontSize: "12px" }}>
-                  Darabszám
+                  Darabszám étel
                 </Typography>
-                <Typography>{totalQuantity}</Typography>
+                <Typography>{totalQuantityDish}</Typography>
+                <Typography variant="overline" sx={{ fontSize: "12px" }}>
+                  Darabszám ital
+                </Typography>
+                <Typography>{totalQuantityDrink}</Typography>
                 <Typography variant="overline" sx={{ fontSize: "12px" }}>
                   Fizetendő összeg
                 </Typography>
                 <Typography>{totalPrice} EUR</Typography>
-                <Button variant="contained">Fizetés</Button>
+                <Button disabled={isLoading} variant="contained">
+                  Fizetés
+                </Button>
               </Stack>
             </CardContent>
           </Card>
