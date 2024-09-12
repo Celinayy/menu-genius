@@ -1,9 +1,9 @@
-import { trpc } from "@/trpc/client";
 import {
   Box,
   Button,
   CardContent,
   Divider,
+  IconButton,
   Stack,
   Typography,
 } from "@mui/material";
@@ -11,6 +11,8 @@ import { Favorite, Image, Product } from "@prisma/client";
 import NextImage from "next/image";
 import { useState } from "react";
 import DeleteFavoriteProductDialog from "./DeleteFavoriteProductDialog";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useRouter } from "next/router";
 
 export type FavoritProductListItemProps = {
   favorit: Favorite & {
@@ -21,6 +23,7 @@ export type FavoritProductListItemProps = {
 };
 
 const FavoritProductListItem = ({ favorit }: FavoritProductListItemProps) => {
+  const router = useRouter();
   const [openDeleteFavoritDialog, setOpenDeleteFavoritDialog] = useState(false);
 
   return (
@@ -45,15 +48,23 @@ const FavoritProductListItem = ({ favorit }: FavoritProductListItemProps) => {
             height={favorit.product.image.height}
           />
         </Box>
-        <Box display={"flex"} justifyContent={"center"}>
+        <Stack direction={"row"} spacing={2}>
           <Button
+            fullWidth
+            onClick={() => router.push(`/products/${favorit.product.id}/`)}
             variant="contained"
+          >
+            Részletek
+          </Button>
+          <Button
             color="secondary"
+            size="large"
+            variant="outlined"
             onClick={() => setOpenDeleteFavoritDialog(true)}
           >
-            Eltávolítás
+            <DeleteIcon />
           </Button>
-        </Box>
+        </Stack>
       </Stack>
       <DeleteFavoriteProductDialog
         favorit={favorit}
