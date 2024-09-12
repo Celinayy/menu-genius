@@ -1,6 +1,7 @@
 import { StarRounded } from "@mui/icons-material";
 import {
   Box,
+  Button,
   CardContent,
   Divider,
   IconButton,
@@ -9,6 +10,7 @@ import {
 } from "@mui/material";
 import { Image, Product } from "@prisma/client";
 import NextImage from "next/image";
+import { useRouter } from "next/router";
 
 export type ProductListItemProps = {
   product: Product & {
@@ -17,6 +19,8 @@ export type ProductListItemProps = {
 };
 
 const ProductListItem = ({ product }: ProductListItemProps) => {
+  const router = useRouter();
+
   return (
     <CardContent>
       <Box display={"flex"} justifyContent={"center"}>
@@ -33,9 +37,17 @@ const ProductListItem = ({ product }: ProductListItemProps) => {
           <Typography>{product.name}</Typography>
           <Typography>{product.price} EUR</Typography>
         </Stack>
-        <IconButton>
-          <StarRounded />
-        </IconButton>
+        <Stack direction={"row"} spacing={1}>
+          <IconButton>
+            <StarRounded />
+          </IconButton>
+          <Button
+            variant="contained"
+            onClick={() => router.push(`/products/${product.id}/`)}
+          >
+            Érdekel
+          </Button>
+        </Stack>
       </Stack>
     </CardContent>
   );

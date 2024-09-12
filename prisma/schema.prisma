@@ -47,15 +47,18 @@ model Ingredient {
 }
 
 model Product {
-    id          String       @id @default(uuid())
+    id          String  @id @default(uuid())
     name        String
     price       Int
     isFood      Boolean
-    image       Image        @relation(fields: [imageId], references: [id])
+    description String
+    image       Image   @relation(fields: [imageId], references: [id])
+    imageId     String  @unique
+
     favorites   Favorite[]
     ingredients Ingredient[]
-    imageId     String       @unique
     allergens   Allergen[]
+    cartItems   CartItem[]
 }
 
 model Favorite {
@@ -94,8 +97,28 @@ model Reservation {
     numberOfGuests Int
     comment        String
 
+    user   User   @relation(fields: [userId], references: [id])
+    userId String
+
     checkInDate  DateTime @default(now()) @map("check_in_date")
     checkOutDate DateTime @map("check_out_date")
+}
+
+model Cart {
+    id     String     @id @default(uuid())
+    user   User       @relation(fields: [userId], references: [id])
+    userId String     @unique
+    items  CartItem[]
+}
+
+model CartItem {
+    id        Int      @id @default(autoincrement())
+    product   Product  @relation(fields: [productId], references: [id])
+    productId String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    cart      Cart     @relation(fields: [cartId], references: [id])
+    cartId    String
 }
 
 model User {
@@ -109,8 +132,10 @@ model User {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    purchases Purchase[]
-    favorites Favorite[]
+    reservations Reservation[]
+    purchases    Purchase[]
+    favorites    Favorite[]
+    cart         Cart?
 }
 
 enum Status {

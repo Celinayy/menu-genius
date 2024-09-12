@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import { PropsWithChildren, useMemo } from "react";
+import color from "color";
 
 export type ThemeProviderProps = PropsWithChildren;
 
@@ -20,9 +21,33 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
           primary: {
             main: "#6b3a20",
           },
+          secondary: {
+            main: "#b45615",
+          },
         },
         components: {
           MuiTextField: {
+            defaultProps: {
+              variant: "outlined",
+            },
+          },
+          MuiCard: {
+            styleOverrides: {
+              root: ({ theme }) => ({
+                backgroundColor: color(theme.palette.background.paper)
+                  .alpha(0.85)
+                  .toString(),
+              }),
+            },
+          },
+          MuiChip: {
+            styleOverrides: {
+              root: ({ theme }) => ({
+                backgroundColor: color(theme.palette.background.paper)
+                  .alpha(1)
+                  .toString(),
+              }),
+            },
             defaultProps: {
               variant: "outlined",
             },

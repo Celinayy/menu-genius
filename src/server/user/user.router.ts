@@ -30,7 +30,7 @@ export const userRouter = router({
     });
 
     return {
-      message: "Successfully sent confirmation email!",
+      message: "Successfully registration!",
     };
   }),
 

@@ -29,43 +29,94 @@ export const seed = async () => {
       })),
   });
 
-  for (let i = 0; i < 24; i++) {
-    const foodName = faker.food.dish();
+  const allergens = await prisma.allergen.createManyAndReturn({
+    data: faker.helpers
+      .uniqueArray(
+        faker.food.spice,
+        faker.number.int({
+          min: 20,
+          max: 40,
+        })
+      )
+      .map((allergenName) => ({
+        name: allergenName,
+      })),
+  });
 
-    const product = await prisma.product.create({
-      data: {
-        name: foodName,
-        price: faker.number.int({
-          min: 5,
-          max: 100,
+  const products = await prisma.$transaction(
+    faker.helpers
+      .uniqueArray(
+        faker.food.dish,
+        faker.number.int({
+          min: 12,
+          max: 24,
+        })
+      )
+      .map((foodName) =>
+        prisma.product.create({
+          data: {
+            name: foodName,
+            price: faker.number.int({
+              min: 5,
+              max: 100,
+            }),
+            isFood: faker.datatype.boolean(),
+            description: faker.food.description(),
+            image: {
+              create: {
+                name: `${slugify(foodName)}.svg`,
+                data: faker.image.dataUri({ height: 256, width: 256 }),
+                height: 256,
+                width: 256,
+              },
+            },
+            allergens: {
+              connect: faker.helpers
+                .arrayElements(allergens, {
+                  min: 1,
+                  max: 5,
+                })
+                .map((allergen) => ({
+                  id: allergen.id,
+                })),
+            },
+            ingredients: {
+              connect: faker.helpers
+                .arrayElements(ingredients, {
+                  min: 1,
+                  max: 5,
+                })
+                .map((ingredient) => ({
+                  id: ingredient.id,
+                })),
+            },
+            favorites: {},
+          },
+        })
+      )
+  );
+
+  const cart = await prisma.cart.create({
+    data: {
+      userId: user.id,
+    },
+  });
+
+  const cartItems = await prisma.cartItem.createManyAndReturn({
+    data: faker.helpers
+      .arrayElements(products, {
+        min: 3,
+        max: 5,
+      })
+      .map((product) => ({
+        productId: product.id,
+        cartId: cart.id,
+        quantity: faker.number.int({
+          min: 1,
+          max: 5,
         }),
-        isFood: faker.datatype.boolean(),
-        image: {
-          create: {
-            name: `${slugify(foodName)}.svg`,
-            data: faker.image.dataUri({ height: 256, width: 256 }),
-            height: 256,
-            width: 256,
-          },
-        },
-        allergens: {
-          create: {
-            name: faker.food.ethnicCategory(),
-          },
-        },
-        ingredients: {
-          connect: faker.helpers
-            .arrayElements(ingredients, {
-              min: 1,
-              max: 5,
-            })
-            .map((ingredient) => ({
-              id: ingredient.id,
-            })),
-        },
-      },
-    });
-  }
+      })),
+  });
 };
 
 console.log("[SEEDER] Seeding successfully finished!");

@@ -32,7 +32,7 @@ const ProductsPage = () => {
       <HeaderComponent />
       <Box display={"flex"} justifyContent={"center"}>
         <Typography variant="caption" sx={{ fontSize: "36px" }}>
-          Termékek
+          Kínálatunk
         </Typography>
       </Box>
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
@@ -58,9 +58,6 @@ const ProductsPage = () => {
               key={`product-list-item-${product.id}`}
               sx={(theme) => ({
                 padding: "8px",
-                backgroundColor: color(theme.palette.background.paper)
-                  .alpha(0.7)
-                  .toString(),
               })}
             >
               <ProductListItem product={product} />

@@ -22,7 +22,7 @@ const LoginPage = () => {
       enqueueSnackbar("Sikeres bejelentkezés!", {
         variant: "success",
       });
-      router.push(`/`);
+      router.push(`/products`);
     },
     onError: (error) => {
       enqueueSnackbar(error.message, {
