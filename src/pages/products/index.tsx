@@ -52,15 +52,7 @@ const ProductsPage = () => {
       <Grid container spacing={2}>
         {data?.map((product) => (
           <Grid size={{ xs: 6, md: 4 }}>
-            <Card
-              variant={"outlined"}
-              key={`product-list-item-${product.id}`}
-              sx={(theme) => ({
-                padding: "8px",
-              })}
-            >
-              <ProductListItem product={product} />
-            </Card>
+            <ProductListItem product={product} />
           </Grid>
         ))}
       </Grid>

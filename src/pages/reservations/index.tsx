@@ -1,5 +1,7 @@
 import HeaderComponent from "@/components/HeaderComponent";
 import ReservationListCard from "@/components/ReservationListCard";
+import { withAuthentication } from "@/hoc/WithAuthentication";
+import { userRouter } from "@/server/user/user.router";
 import { trpc } from "@/trpc/client";
 import {
   Grid2 as Grid,
@@ -8,10 +10,35 @@ import {
   Typography,
   Divider,
   Card,
+  Button,
 } from "@mui/material";
+import { useRouter } from "next/router";
 
 const ReservationsPage = () => {
-  const { data, isLoading } = trpc.reservation.list.useQuery();
+  const { data } = trpc.reservation.list.useQuery();
+
+  const router = useRouter();
+
+  if (data?.length === 0) {
+    return (
+      <Container>
+        <HeaderComponent />
+        <Box display={"flex"} justifyContent={"center"}>
+          <Typography variant="caption" sx={{ fontSize: "36px" }}>
+            Jelenleg nincs foglalásod
+          </Typography>
+        </Box>
+        <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={() => router.push("/products")}
+        >
+          Irány a kínálat!
+        </Button>
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -33,4 +60,4 @@ const ReservationsPage = () => {
   );
 };
 
-export default ReservationsPage;
+export default withAuthentication(ReservationsPage);
