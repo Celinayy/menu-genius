@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import Moment from "moment";
 import DeleteReservationDialog from "@/components/DeleteReservationDialog";
 import { useState } from "react";
+import { withAuthentication } from "@/hoc/WithAuthentication";
 
 const SingleReservationPage = () => {
   const router = useRouter();
@@ -92,4 +93,4 @@ const SingleReservationPage = () => {
   );
 };
 
-export default SingleReservationPage;
+export default withAuthentication(SingleReservationPage);
