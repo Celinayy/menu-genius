@@ -1,4 +1,5 @@
 import HeaderComponent from "@/components/HeaderComponent";
+import { withAuthentication } from "@/hoc/WithAuthentication";
 import { trpc } from "@/trpc/client";
 import {
   Container,
@@ -12,14 +13,18 @@ import {
   Box,
   Divider,
 } from "@mui/material";
+import { User } from "@prisma/client";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 
-const SettingsPage = () => {
+export type SettingsPageProps = {
+  user: User;
+};
+
+const SettingsPage = ({ user }: SettingsPageProps) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { data, isLoading } = trpc.user.find.useQuery();
-  const { mutate } = trpc.user.update.useMutation({
+  const { mutate, isLoading } = trpc.user.update.useMutation({
     onSuccess: () => {
       enqueueSnackbar("Sikeres változtatás!", {
         variant: "success",
@@ -67,7 +72,7 @@ const SettingsPage = () => {
                   <Typography variant="caption" sx={{ fontSize: "14px " }}>
                     Jelenlegi név
                   </Typography>
-                  <TextField size="small" disabled value={data?.name} />
+                  <TextField size="small" disabled value={user.name} />
                 </Stack>
                 <Stack>
                   <Typography variant="caption" sx={{ fontSize: "14px " }}>
@@ -118,7 +123,7 @@ const SettingsPage = () => {
                     size="small"
                     type="email"
                     disabled
-                    value={data?.email}
+                    value={user.email}
                   />
                 </Stack>
                 <Stack>
@@ -220,4 +225,4 @@ const SettingsPage = () => {
   );
 };
 
-export default SettingsPage;
+export default withAuthentication(SettingsPage);

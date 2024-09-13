@@ -1,5 +1,6 @@
 import CartListItem from "@/components/CartListItem";
 import HeaderComponent from "@/components/HeaderComponent";
+import { withAuthentication } from "@/hoc/WithAuthentication";
 import { trpc } from "@/trpc/client";
 import {
   Grid2 as Grid,
@@ -61,14 +62,7 @@ const CartPage = () => {
         <Grid size={{ xs: 12, md: 6 }}>
           <Stack spacing={2}>
             {data?.map((cartItem) => (
-              <Card
-                variant={"outlined"}
-                sx={(theme) => ({
-                  padding: "8px",
-                })}
-              >
-                <CartListItem cartItem={cartItem} />
-              </Card>
+              <CartListItem cartItem={cartItem} />
             ))}
           </Stack>
         </Grid>
@@ -104,4 +98,4 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+export default withAuthentication(CartPage);

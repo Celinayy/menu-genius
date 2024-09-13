@@ -1,5 +1,6 @@
 import FavoritProductListItem from "@/components/FavoritProductListItem";
 import HeaderComponent from "@/components/HeaderComponent";
+import { withAuthentication } from "@/hoc/WithAuthentication";
 import { trpc } from "@/trpc/client";
 import {
   Box,
@@ -66,4 +67,4 @@ const FavoritesPage = () => {
   );
 };
 
-export default FavoritesPage;
+export default withAuthentication(FavoritesPage);

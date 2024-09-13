@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Card,
   CardContent,
   CardProps,
   Divider,
@@ -25,45 +26,53 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   return (
-    <CardContent>
-      <Stack
-        direction={"row"}
-        alignItems={"center"}
-        justifyContent={"space-between"}
-      >
-        <Typography variant="h5" sx={{}}>
-          {cartItem.product.name}
-        </Typography>
-        <Typography variant="overline" sx={{ fontSize: "18px" }}>
-          {cartItem.product.price} EUR
-        </Typography>
-      </Stack>
-      <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
-      <Stack direction={"column"} spacing={2}>
-        <Box display={"flex"} justifyContent={"center"}>
-          <NextImage
-            src={cartItem.product.image.data}
-            alt={cartItem.product.name}
-            width={cartItem.product.image.width}
-            height={cartItem.product.image.height}
-          />
-        </Box>
-        <Box display={"flex"} justifyContent={"center"}>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => setOpenDeleteDialog(true)}
-          >
-            Eltávolítás
-          </Button>
-        </Box>
-      </Stack>
-      <DeleteCartItemDialog
-        cartItem={cartItem}
-        open={openDeleteDialog}
-        onClose={() => setOpenDeleteDialog(false)}
-      />
-    </CardContent>
+    <Card
+      variant={"outlined"}
+      key={`cartItem-product-list-item-${cartItem.product.id}`}
+      sx={(theme) => ({
+        padding: "8px",
+      })}
+    >
+      <CardContent>
+        <Stack
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+        >
+          <Typography variant="h5" sx={{}}>
+            {cartItem.product.name}
+          </Typography>
+          <Typography variant="overline" sx={{ fontSize: "18px" }}>
+            {cartItem.product.price} EUR
+          </Typography>
+        </Stack>
+        <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
+        <Stack direction={"column"} spacing={2}>
+          <Box display={"flex"} justifyContent={"center"}>
+            <NextImage
+              src={cartItem.product.image.data}
+              alt={cartItem.product.name}
+              width={cartItem.product.image.width}
+              height={cartItem.product.image.height}
+            />
+          </Box>
+          <Box display={"flex"} justifyContent={"center"}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => setOpenDeleteDialog(true)}
+            >
+              Eltávolítás
+            </Button>
+          </Box>
+        </Stack>
+        <DeleteCartItemDialog
+          cartItem={cartItem}
+          open={openDeleteDialog}
+          onClose={() => setOpenDeleteDialog(false)}
+        />
+      </CardContent>
+    </Card>
   );
 };
 
