@@ -1,6 +1,7 @@
 import HeaderComponent from "@/components/HeaderComponent";
 import { withAuthentication } from "@/hoc/WithAuthentication";
 import { trpc } from "@/trpc/client";
+import { palettes } from "@/providers/ThemeProvider";
 import {
   Container,
   Typography,
@@ -12,8 +13,11 @@ import {
   Button,
   Box,
   Divider,
+  ThemeProvider,
+  Tooltip,
+  createTheme,
 } from "@mui/material";
-import { User } from "@prisma/client";
+import { User, PaletteMode } from "@prisma/client";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 
@@ -54,9 +58,43 @@ const SettingsPage = ({ user }: SettingsPageProps) => {
   const [newPassword, setPasswordNew] = useState("");
   const [newPasswordAgain, setPasswordNewAgain] = useState("");
 
+  const options: { label: string; value: PaletteMode }[] = [
+    {
+      label: "Sötét barna",
+      value: "DARK_BROWN",
+    },
+    {
+      label: "Sötét kék",
+      value: "DARK_BLUE",
+    },
+    {
+      label: "Zöld",
+      value: "GREEN",
+    },
+    {
+      label: "Rózsaszín",
+      value: "PINK",
+    },
+    {
+      label: "Sárga",
+      value: "YELLOW",
+    },
+    {
+      label: "Világos kék",
+      value: "LIGHT_BLUE",
+    },
+    {
+      label: "Szürke",
+      value: "GREY",
+    },
+    {
+      label: "Lila",
+      value: "PURPLE",
+    },
+  ];
+
   return (
     <Container>
-      <HeaderComponent />
       <Box display={"flex"} justifyContent={"center"}>
         <Typography variant="caption" sx={{ fontSize: "36px" }}>
           Felhasználó adatok
@@ -217,6 +255,39 @@ const SettingsPage = ({ user }: SettingsPageProps) => {
                   Mentés
                 </Button>
               </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid size={{ xs: 12, md: 4 }}>
+          <Card>
+            <CardContent>
+              <Grid container spacing={2} justifyContent={"center"}>
+                {options.map((option, index) => (
+                  <Grid width={120} key={`palette-${index}`}>
+                    <ThemeProvider
+                      theme={createTheme({
+                        palette: {
+                          primary: palettes[option.value],
+                        },
+                      })}
+                    >
+                      <Tooltip title={option.label}>
+                        <Button
+                          sx={{ height: "48px", borderRadius: "8px" }}
+                          disabled={isLoading}
+                          variant="contained"
+                          fullWidth
+                          onClick={() =>
+                            mutate({
+                              paletteMode: option.value,
+                            })
+                          }
+                        ></Button>
+                      </Tooltip>
+                    </ThemeProvider>
+                  </Grid>
+                ))}
+              </Grid>
             </CardContent>
           </Card>
         </Grid>

@@ -105,12 +105,13 @@ model Reservation {
 }
 
 model User {
-    id       String  @id @default(uuid())
-    name     String
-    email    String  @unique
-    password String
-    phone    String?
-    darkMode Boolean @default(false)
+    id          String      @id @default(uuid())
+    name        String
+    email       String      @unique
+    password    String
+    phone       String?
+    darkMode    Boolean     @default(false)
+    paletteMode PaletteMode @default(DARK_BROWN)
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -119,6 +120,17 @@ model User {
     purchases    Purchase[]
     favorites    Favorite[]
     cart         Cart?
+}
+
+enum PaletteMode {
+    PINK
+    DARK_BROWN
+    DARK_BLUE
+    LIGHT_BLUE
+    PURPLE
+    YELLOW
+    GREEN
+    GREY
 }
 
 model Cart {

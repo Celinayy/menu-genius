@@ -26,7 +26,6 @@ export default function Home() {
   if (user) {
     return (
       <Container>
-        <HeaderComponent />
         <Box display={"flex"} justifyContent={"center"}>
           <Typography
             textAlign={"center"}
@@ -50,7 +49,7 @@ export default function Home() {
                     variant="contained"
                     onClick={() => router.push("/products")}
                     disabled={isLoading}
-                    color="primary"
+                    color="secondary"
                   >
                     Irány a kínálat
                   </Button>
@@ -131,7 +130,6 @@ export default function Home() {
 
   return (
     <Container>
-      <HeaderComponent />
       <Box display={"flex"} justifyContent={"center"}>
         <Typography
           textAlign={"center"}

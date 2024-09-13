@@ -1,11 +1,4 @@
-html,body {
-    height: 100%;
-}
-
+html,
 body {
-    background-image: url("/wave.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center bottom;
-    background-attachment: fixed;
-  }
+  height: 100%;
+}

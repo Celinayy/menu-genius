@@ -57,7 +57,7 @@ const FavoritProductListItem = ({ favorit }: FavoritProductListItemProps) => {
             Részletek
           </Button>
           <Button
-            color="secondary"
+            color="error"
             size="large"
             variant="outlined"
             onClick={() => setOpenDeleteFavoritDialog(true)}

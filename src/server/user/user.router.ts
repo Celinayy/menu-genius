@@ -63,6 +63,7 @@ export const userRouter = router({
             ? await bcrypt.hash(opts.input.password, 10)
             : undefined,
           darkMode: opts.input.darkMode,
+          paletteMode: opts.input.paletteMode,
         },
       });
 

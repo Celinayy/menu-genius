@@ -22,7 +22,6 @@ const ReservationsPage = () => {
   if (data?.length === 0) {
     return (
       <Container>
-        <HeaderComponent />
         <Box display={"flex"} justifyContent={"center"}>
           <Typography variant="caption" sx={{ fontSize: "36px" }}>
             Jelenleg nincs foglalásod
@@ -42,7 +41,6 @@ const ReservationsPage = () => {
 
   return (
     <Container>
-      <HeaderComponent />
       <Box display={"flex"} justifyContent={"center"}>
         <Typography variant="caption" sx={{ fontSize: "36px" }}>
           Foglalások

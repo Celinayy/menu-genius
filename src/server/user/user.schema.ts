@@ -14,6 +14,16 @@ export const UpdateUserPayloadSchema = z
     password: z.string().min(1),
     currentPassword: z.string().min(1),
     darkMode: z.boolean(),
+    paletteMode: z.enum([
+      "PINK",
+      "DARK_BLUE",
+      "DARK_BROWN",
+      "LIGHT_BLUE",
+      "PURPLE",
+      "YELLOW",
+      "GREEN",
+      "GREY",
+    ]),
   })
   .partial();
 
