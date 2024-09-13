@@ -27,8 +27,8 @@ export const seed = async () => {
       () => ({
         userId: user.id,
         comment: faker.lorem.sentence({
-          min: 10,
-          max: 36,
+          min: 4,
+          max: 10,
         }),
         name: user.name,
         numberOfGuests: faker.number.int({
