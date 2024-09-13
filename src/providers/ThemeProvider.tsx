@@ -33,7 +33,7 @@ export const palettes = {
 };
 export const secondaryPalettes = {
   PINK: { main: pink[300] },
-  DARK_BROWN: { main: "#c45c13" },
+  DARK_BROWN: { main: "#a74b1c" },
   DARK_BLUE: { main: blue[500] },
   LIGHT_BLUE: { main: lightBlue[600] },
   PURPLE: { main: purple[300] },

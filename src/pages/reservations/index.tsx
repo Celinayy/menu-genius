@@ -11,6 +11,7 @@ import {
   Divider,
   Card,
   Button,
+  Stack,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
@@ -32,14 +33,23 @@ const ReservationsPage = () => {
           Foglalások
         </Typography>
       </Box>
-      <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
-      <Grid container spacing={2}>
-        {data?.map((reservation) => (
-          <Grid size={{ xs: 12 }}>
-            <ReservationListCard reservation={reservation} />
-          </Grid>
-        ))}
-      </Grid>
+      <Divider sx={{ marginBottom: "12px", marginTop: "12px" }} />
+      <Stack direction={"column"} spacing={2}>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={() => router.push("/reservations/create")}
+        >
+          Új foglalás létrehozása
+        </Button>
+        <Grid container spacing={2}>
+          {data?.map((reservation) => (
+            <Grid size={{ xs: 12 }}>
+              <ReservationListCard reservation={reservation} />
+            </Grid>
+          ))}
+        </Grid>
+      </Stack>
     </Container>
   );
 };
