@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Reservation } from "@prisma/client";
 import { useRouter } from "next/router";
+import Moment from "moment";
 
 export type ReservationListCardProps = {
   reservation: Reservation;
@@ -59,7 +60,7 @@ const ReservationListCard = ({ reservation }: ReservationListCardProps) => {
           />
           <Box display={"flex"} justifyContent={"center"}>
             <Typography>
-              Időpont: {reservation.checkInDate.toLocaleString()}
+              Időpont: {Moment(reservation.checkInDate).format("YYYY-MM-DD")}
             </Typography>
             {!!reservation.checkOutDate && (
               <Typography>
