@@ -3,6 +3,7 @@ import {
   CalendarMonthOutlined,
   CalendarMonthRounded,
   LogoutOutlined,
+  MarkEmailUnreadRounded,
   MenuOutlined,
   ProductionQuantityLimitsRounded,
   RestaurantOutlined,
@@ -24,6 +25,7 @@ import {
   FormControlLabel,
   Switch,
   Avatar,
+  Badge,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -33,6 +35,8 @@ import { useSnackbar } from "notistack";
 
 const HeaderComponent = () => {
   const { data: user } = trpc.user.find.useQuery();
+  const { data: cartItems } = trpc.cartItem.list.useQuery();
+  const { data: reservations } = trpc.reservation.list.useQuery();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -126,15 +130,37 @@ const HeaderComponent = () => {
                     sx={{ justifyContent: "space-between" }}
                     onClick={() => router.push("/cart")}
                   >
-                    <Typography>Kosár</Typography>
-                    <ShoppingCart />
+                    {cartItems && cartItems.length > 0 ? (
+                      <Fragment>
+                        <Typography>Kosár</Typography>
+                        <Badge badgeContent={cartItems.length} color="error">
+                          <ShoppingCart />
+                        </Badge>
+                      </Fragment>
+                    ) : (
+                      <Fragment>
+                        <Typography>Kosár</Typography>
+                        <ShoppingCart />
+                      </Fragment>
+                    )}
                   </MenuItem>
                   <MenuItem
                     sx={{ justifyContent: "space-between" }}
                     onClick={() => router.push("/reservations")}
                   >
-                    <Typography>Foglalások</Typography>
-                    <CalendarMonthRounded />
+                    {reservations && reservations.length > 0 ? (
+                      <Fragment>
+                        <Typography>Foglalások</Typography>
+                        <Badge badgeContent={reservations.length} color="error">
+                          <CalendarMonthRounded />
+                        </Badge>
+                      </Fragment>
+                    ) : (
+                      <Fragment>
+                        <Typography>Foglalások</Typography>
+                        <CalendarMonthRounded />
+                      </Fragment>
+                    )}
                   </MenuItem>
                   <MenuItem
                     sx={{ justifyContent: "space-between" }}
