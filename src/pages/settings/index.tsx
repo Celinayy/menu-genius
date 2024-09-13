@@ -101,7 +101,7 @@ const SettingsPage = ({ user }: SettingsPageProps) => {
         </Typography>
       </Box>
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
-      <Grid container spacing={3}>
+      <Grid container spacing={3} justifyContent={"center"}>
         <Grid size={{ xs: 12, md: 4 }}>
           <Card>
             <CardContent>

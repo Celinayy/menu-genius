@@ -13,6 +13,7 @@ import { Image } from "@prisma/client";
 import NextImage from "next/image";
 import { useState } from "react";
 import DeleteCartItemDialog from "./DeleteCartItemDialog";
+import { useRouter } from "next/router";
 
 export type CartListItemProps = CardProps & {
   cartItem: CartItem & {
@@ -24,6 +25,7 @@ export type CartListItemProps = CardProps & {
 
 const CartListItem = ({ cartItem }: CartListItemProps) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const router = useRouter();
 
   return (
     <Card
@@ -57,13 +59,22 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
             />
           </Box>
           <Box display={"flex"} justifyContent={"center"}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => setOpenDeleteDialog(true)}
-            >
-              Eltávolítás
-            </Button>
+            <Stack direction={"row"} spacing={2}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => router.push(`/products/${cartItem.product.id}`)}
+              >
+                Részletek
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => setOpenDeleteDialog(true)}
+              >
+                Eltávolítás
+              </Button>
+            </Stack>
           </Box>
         </Stack>
         <DeleteCartItemDialog
