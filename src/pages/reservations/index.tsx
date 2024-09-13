@@ -13,6 +13,7 @@ import {
   Button,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import { Fragment } from "react";
 
 const ReservationsPage = () => {
   const { data } = trpc.reservation.list.useQuery();
@@ -20,23 +21,8 @@ const ReservationsPage = () => {
   const router = useRouter();
 
   if (data?.length === 0) {
-    return (
-      <Container>
-        <Box display={"flex"} justifyContent={"center"}>
-          <Typography variant="caption" sx={{ fontSize: "36px" }}>
-            Jelenleg nincs foglalásod
-          </Typography>
-        </Box>
-        <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
-        <Button
-          fullWidth
-          variant="contained"
-          onClick={() => router.push("/reservations/create")}
-        >
-          Foglalás létrehozása
-        </Button>
-      </Container>
-    );
+    router.push("/reservations/create");
+    return <Fragment></Fragment>;
   }
 
   return (

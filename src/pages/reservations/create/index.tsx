@@ -26,7 +26,7 @@ const CreateReservationPage = () => {
       enqueueSnackbar("Sikeresen létrehoztad a foglalást!", {
         variant: "success",
       });
-      router.push("/reservations");
+      router.push("/");
     },
     onError: (error) => {
       enqueueSnackbar(error.message, {

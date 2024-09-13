@@ -71,11 +71,11 @@ export default function Home() {
                   </Button>
                   <Button
                     variant="contained"
-                    onClick={() => router.push("/reservations/create")}
+                    onClick={() => router.push("/reservations")}
                     disabled={isLoading}
                     color="primary"
                   >
-                    Foglalás létrehozása
+                    Foglalásaid
                   </Button>
                   <Button
                     variant="contained"
