@@ -36,6 +36,16 @@ export const reservationRouter = router({
     });
   }),
 
+  find: protectedProcedure
+    .input(FindReservationPayloadSchema)
+    .query(async (opts) => {
+      return await prisma.reservation.findFirstOrThrow({
+        where: {
+          id: opts.input.reservationId,
+        },
+      });
+    }),
+
   delete: reservationProcedure
     .input(FindReservationPayloadSchema)
     .mutation(async (opts) => {

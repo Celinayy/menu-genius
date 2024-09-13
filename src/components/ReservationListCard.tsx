@@ -9,12 +9,14 @@ import {
   Typography,
 } from "@mui/material";
 import { Reservation } from "@prisma/client";
+import { useRouter } from "next/router";
 
 export type ReservationListCardProps = {
   reservation: Reservation;
 };
 
 const ReservationListCard = ({ reservation }: ReservationListCardProps) => {
+  const router = useRouter();
   return (
     <Card>
       <CardContent>
@@ -28,7 +30,9 @@ const ReservationListCard = ({ reservation }: ReservationListCardProps) => {
             <Typography variant="h5" textAlign={"center"}>
               {reservation.name} foglalása
             </Typography>
-            <IconButton>
+            <IconButton
+              onClick={() => router.push(`/reservations/${reservation.id}`)}
+            >
               <EditOutlined color="primary" />
             </IconButton>
           </Stack>
