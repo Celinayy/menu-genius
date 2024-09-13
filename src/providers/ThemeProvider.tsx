@@ -8,8 +8,39 @@ import {
 import { SnackbarProvider } from "notistack";
 import { PropsWithChildren, useMemo } from "react";
 import color from "color";
+import {
+  lightBlue,
+  green,
+  grey,
+  pink,
+  yellow,
+  purple,
+  brown,
+  blue,
+} from "@mui/material/colors";
 
 export type ThemeProviderProps = PropsWithChildren;
+
+export const palettes = {
+  PINK: { main: pink[600] },
+  DARK_BROWN: { main: "#6b3a20" },
+  DARK_BLUE: { main: blue[900] },
+  LIGHT_BLUE: { main: lightBlue[800] },
+  PURPLE: { main: purple[600] },
+  YELLOW: { main: yellow[600] },
+  GREEN: { main: green[900] },
+  GREY: { main: grey[800] },
+};
+export const secondaryPalettes = {
+  PINK: { main: pink[300] },
+  DARK_BROWN: { main: "#c45c13" },
+  DARK_BLUE: { main: blue[500] },
+  LIGHT_BLUE: { main: lightBlue[600] },
+  PURPLE: { main: purple[300] },
+  YELLOW: { main: yellow[200] },
+  GREEN: { main: green[600] },
+  GREY: { main: grey[600] },
+};
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const { data: user } = trpc.user.find.useQuery();
@@ -18,12 +49,8 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       createTheme({
         palette: {
           mode: user?.darkMode ? "dark" : "light",
-          primary: {
-            main: "#6b3a20",
-          },
-          secondary: {
-            main: "#b45615",
-          },
+          primary: palettes[user?.paletteMode ?? "DARK_BROWN"],
+          secondary: secondaryPalettes[user?.paletteMode ?? "DARK_BROWN"],
         },
         components: {
           MuiTextField: {
@@ -54,7 +81,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
           },
         },
       }),
-    [user?.darkMode]
+    [user?.darkMode, user?.paletteMode]
   );
 
   return (

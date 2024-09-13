@@ -42,7 +42,6 @@ const SingleReservationPage = () => {
 
   return (
     <Container>
-      <HeaderComponent />
       <Stack direction={"column"}>
         <Typography
           textAlign={"center"}
@@ -73,7 +72,7 @@ const SingleReservationPage = () => {
               </Typography>
               <Button
                 fullWidth
-                color="secondary"
+                color="primary"
                 variant="contained"
                 disabled={isLoading}
                 onClick={() => setOpenDeleteReservationDialog(true)}

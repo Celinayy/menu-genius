@@ -49,7 +49,6 @@ const RegisterPage = () => {
 
   return (
     <Container>
-      <HeaderComponent />
       <Box display={"flex"} justifyContent={"center"}>
         <Typography variant="caption" sx={{ fontSize: "36px" }}>
           Regisztráció
