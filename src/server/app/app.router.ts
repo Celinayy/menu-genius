@@ -8,6 +8,7 @@ import { allergenRouter } from "../allergen/allergen.router";
 import { cartRouter } from "../cart/cart.router";
 import { cartItemRouter } from "../cartItem/cartItem.router";
 import { favoritProductRouter } from "../favorit/favorit.router";
+import { reservationRouter } from "../reservation/reservation.router";
 
 export const appRouter = router({
   auth: authRouter,
@@ -18,6 +19,7 @@ export const appRouter = router({
   cart: cartRouter,
   cartItem: cartItemRouter,
   favoritProduct: favoritProductRouter,
+  reservation: reservationRouter,
 });
 
 export type AppRouter = typeof appRouter;
