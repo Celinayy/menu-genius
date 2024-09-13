@@ -9,27 +9,27 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { CartItem, Product } from "@prisma/client";
+import { Reservation } from "@prisma/client";
+import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
+import Moment from "moment";
 
-export type DeleteCartItemDialogProps = DialogProps & {
-  cartItem: CartItem & {
-    product: Product;
-  };
+export type DeleteReservationDialogProps = DialogProps & {
+  reservation: Reservation;
 };
 
-const DeleteCartItemDialog = ({
-  cartItem,
+const DeleteReservationDialog = ({
+  reservation,
   ...props
-}: DeleteCartItemDialogProps) => {
+}: DeleteReservationDialogProps) => {
   const { enqueueSnackbar } = useSnackbar();
-
-  const { mutate, isLoading } = trpc.cartItem.delete.useMutation({
+  const router = useRouter();
+  const { mutate, isLoading } = trpc.reservation.delete.useMutation({
     onSuccess: () => {
-      props.onClose?.({}, "escapeKeyDown");
-      enqueueSnackbar("Sikeresen eltávolítottad a terméket a kosárból!", {
+      enqueueSnackbar("Sikeresen törölted a foglalásod!", {
         variant: "success",
       });
+      router.push("/reservations");
     },
     onError: (error) => {
       enqueueSnackbar(error.message, {
@@ -40,9 +40,7 @@ const DeleteCartItemDialog = ({
 
   return (
     <Dialog {...props}>
-      <DialogTitle textAlign={"center"}>
-        Termék eltávolítása a kosaradból
-      </DialogTitle>
+      <DialogTitle textAlign={"center"}>Foglalás törlése</DialogTitle>
       <Divider
         sx={{
           width: "80%",
@@ -51,22 +49,22 @@ const DeleteCartItemDialog = ({
       />
       <DialogContent>
         <Stack direction={"column"} spacing={2} justifyContent={"center"}>
-          <Typography textAlign={"center"}>
-            {cartItem.product.isFood ? "Étel" : "Ital"}
+          <Typography textAlign={"center"} variant="h6">
+            Biztosan törlöd az alábbi dátumon levő foglalásod?
           </Typography>
-          <Typography variant="h5" textAlign={"center"}>
-            {cartItem.product.name}
+          <Typography textAlign={"center"}>
+            {Moment(reservation.checkInDate).format("YYYY-MM-DD")}
           </Typography>
           <Button
             variant="contained"
             color="secondary"
             onClick={() =>
               mutate({
-                productId: cartItem.id,
+                reservationId: reservation.id,
               })
             }
           >
-            Eltávolítás
+            Törlés
           </Button>
         </Stack>
       </DialogContent>
@@ -74,4 +72,4 @@ const DeleteCartItemDialog = ({
   );
 };
 
-export default DeleteCartItemDialog;
+export default DeleteReservationDialog;

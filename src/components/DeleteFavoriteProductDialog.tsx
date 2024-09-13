@@ -1,6 +1,8 @@
 import { trpc } from "@/trpc/client";
 import {
+  Box,
   Button,
+  Container,
   Dialog,
   DialogContent,
   DialogProps,
@@ -9,27 +11,31 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { CartItem, Product } from "@prisma/client";
+import { Favorite, Product } from "@prisma/client";
+import router from "next/router";
 import { useSnackbar } from "notistack";
+import HeaderComponent from "./HeaderComponent";
 
-export type DeleteCartItemDialogProps = DialogProps & {
-  cartItem: CartItem & {
+export type DeleteFavoriteProductDialogProps = DialogProps & {
+  favorit: Favorite & {
     product: Product;
   };
 };
 
-const DeleteCartItemDialog = ({
-  cartItem,
+const DeleteFavoriteProductDialog = ({
+  favorit,
   ...props
-}: DeleteCartItemDialogProps) => {
+}: DeleteFavoriteProductDialogProps) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { mutate, isLoading } = trpc.cartItem.delete.useMutation({
+  const { mutate, isLoading } = trpc.favoritProduct.delete.useMutation({
     onSuccess: () => {
-      props.onClose?.({}, "escapeKeyDown");
-      enqueueSnackbar("Sikeresen eltávolítottad a terméket a kosárból!", {
-        variant: "success",
-      });
+      enqueueSnackbar(
+        "Sikeresen eltávolítottad a terméket a kedvencek közül!",
+        {
+          variant: "success",
+        }
+      );
     },
     onError: (error) => {
       enqueueSnackbar(error.message, {
@@ -41,7 +47,7 @@ const DeleteCartItemDialog = ({
   return (
     <Dialog {...props}>
       <DialogTitle textAlign={"center"}>
-        Termék eltávolítása a kosaradból
+        Termék eltávolítása a kedvencek közül
       </DialogTitle>
       <Divider
         sx={{
@@ -52,17 +58,17 @@ const DeleteCartItemDialog = ({
       <DialogContent>
         <Stack direction={"column"} spacing={2} justifyContent={"center"}>
           <Typography textAlign={"center"}>
-            {cartItem.product.isFood ? "Étel" : "Ital"}
+            {favorit.product.isFood ? "Étel" : "Ital"}
           </Typography>
           <Typography variant="h5" textAlign={"center"}>
-            {cartItem.product.name}
+            {favorit.product.name}
           </Typography>
           <Button
             variant="contained"
             color="secondary"
             onClick={() =>
               mutate({
-                productId: cartItem.id,
+                productId: favorit.id,
               })
             }
           >
@@ -74,4 +80,4 @@ const DeleteCartItemDialog = ({
   );
 };
 
-export default DeleteCartItemDialog;
+export default DeleteFavoriteProductDialog;

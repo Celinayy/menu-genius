@@ -11,6 +11,7 @@ import {
   Stack,
   Button,
   Chip,
+  CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
@@ -35,12 +36,25 @@ const SingleProductPage = () => {
     },
   });
 
+  if (!product) {
+    return (
+      <Container data-testid="group-list-loader">
+        <Box>
+          <Stack direction={"column"} spacing={2} sx={{ alignItems: "center" }}>
+            <Typography>Az oldal töltődik</Typography>
+            <CircularProgress />
+          </Stack>
+        </Box>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <HeaderComponent />
       <Box display={"flex"} justifyContent={"center"}>
         <Typography variant="caption" sx={{ fontSize: "36px" }}>
-          {product?.name}
+          {product.name}
         </Typography>
       </Box>
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
@@ -53,17 +67,17 @@ const SingleProductPage = () => {
           >
             <Box display={"flex"} justifyContent={"center"}>
               <Typography variant="caption" sx={{ fontSize: "24px" }}>
-                {product?.name}
+                {product.name}
               </Typography>
             </Box>
             <Divider sx={{ marginBottom: "12px", marginTop: "12px" }} />
 
             <CardContent sx={{ textAlign: "center" }}>
               <NextImage
-                src={product?.image.data as string}
-                alt={product?.image.name as string}
-                width={product?.image.width}
-                height={product?.image.height}
+                src={product.image.data as string}
+                alt={product.image.name as string}
+                width={product.image.width}
+                height={product.image.height}
               />
             </CardContent>
           </Card>
@@ -84,7 +98,7 @@ const SingleProductPage = () => {
               <Stack spacing={2} direction={"column"}>
                 <Typography variant="overline">Allergének</Typography>
                 <Stack direction={"row"} spacing={1}>
-                  {product?.allergens?.map((allergen) => (
+                  {product.allergens.map((allergen) => (
                     <Stack direction={"row"} justifyContent={"space-between"}>
                       <Chip
                         label={allergen.name}
@@ -100,7 +114,7 @@ const SingleProductPage = () => {
                 </Stack>
                 <Typography variant="overline">Összetevők</Typography>
                 <Stack direction={"row"} spacing={1}>
-                  {product?.ingredients?.map((ingredient) => (
+                  {product.ingredients.map((ingredient) => (
                     <Stack direction={"row"} justifyContent={"space-between"}>
                       <Chip
                         label={ingredient.name}
@@ -114,7 +128,7 @@ const SingleProductPage = () => {
                     </Stack>
                   ))}
                 </Stack>
-                <Typography>{product?.description}</Typography>
+                <Typography>{product.description}</Typography>
                 <Stack direction={"row"} spacing={2}>
                   <Button
                     variant="contained"
@@ -130,7 +144,7 @@ const SingleProductPage = () => {
                     disabled={isLoading}
                     onClick={() =>
                       mutate({
-                        productId: product!.id,
+                        productId: product.id,
                       })
                     }
                   >

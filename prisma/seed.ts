@@ -1,8 +1,9 @@
 import { prisma } from "@/server/db/db.client";
 import bcrypt from "bcryptjs";
 import { faker } from "@faker-js/faker";
-import { boolean } from "zod";
+import { boolean, nullable } from "zod";
 import slugify from "slugify";
+import { taintUniqueValue } from "next/dist/server/app-render/rsc/taint";
 
 export const seed = async () => {
   console.log("[SEEDER] Starting seed...");
@@ -13,6 +14,30 @@ export const seed = async () => {
       email: "user@test.com",
       password: await bcrypt.hash("password", 10),
     },
+  });
+
+  const reservations = await prisma.reservation.createManyAndReturn({
+    data: Array.from(
+      {
+        length: faker.number.int({
+          min: 1,
+          max: 5,
+        }),
+      },
+      () => ({
+        userId: user.id,
+        comment: faker.lorem.sentence({
+          min: 4,
+          max: 10,
+        }),
+        name: user.name,
+        numberOfGuests: faker.number.int({
+          min: 1,
+          max: 10,
+        }),
+        phone: user.phone ?? faker.phone.number(),
+      })
+    ),
   });
 
   const ingredients = await prisma.ingredient.createManyAndReturn({
@@ -111,10 +136,6 @@ export const seed = async () => {
       .map((product) => ({
         productId: product.id,
         cartId: cart.id,
-        quantity: faker.number.int({
-          min: 1,
-          max: 5,
-        }),
       })),
   });
 };

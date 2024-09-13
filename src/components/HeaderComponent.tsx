@@ -1,5 +1,7 @@
 import { trpc } from "@/trpc/client";
 import {
+  CalendarMonthOutlined,
+  CalendarMonthRounded,
   LogoutOutlined,
   MenuOutlined,
   ProductionQuantityLimitsRounded,
@@ -7,6 +9,7 @@ import {
   SettingsRounded,
   ShoppingCart,
   StarOutline,
+  StarRounded,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -128,10 +131,17 @@ const HeaderComponent = () => {
                   </MenuItem>
                   <MenuItem
                     sx={{ justifyContent: "space-between" }}
+                    onClick={() => router.push("/reservations")}
+                  >
+                    <Typography>Foglalások</Typography>
+                    <CalendarMonthRounded />
+                  </MenuItem>
+                  <MenuItem
+                    sx={{ justifyContent: "space-between" }}
                     onClick={() => router.push("/favorites")}
                   >
                     <Typography>Kedvenek</Typography>
-                    <StarOutline />
+                    <StarRounded />
                   </MenuItem>
                   <MenuItem
                     sx={{ justifyContent: "space-between" }}
