@@ -100,25 +100,8 @@ model Reservation {
     user   User   @relation(fields: [userId], references: [id])
     userId String
 
-    checkInDate  DateTime @default(now()) @map("check_in_date")
-    checkOutDate DateTime @map("check_out_date")
-}
-
-model Cart {
-    id     String     @id @default(uuid())
-    user   User       @relation(fields: [userId], references: [id])
-    userId String     @unique
-    items  CartItem[]
-}
-
-model CartItem {
-    id        String   @id @default(uuid())
-    product   Product  @relation(fields: [productId], references: [id])
-    productId String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    cart      Cart     @relation(fields: [cartId], references: [id])
-    cartId    String
+    checkInDate  DateTime  @default(now()) @map("check_in_date")
+    checkOutDate DateTime? @map("check_out_date")
 }
 
 model User {
@@ -136,6 +119,23 @@ model User {
     purchases    Purchase[]
     favorites    Favorite[]
     cart         Cart?
+}
+
+model Cart {
+    id     String     @id @default(uuid())
+    user   User       @relation(fields: [userId], references: [id])
+    userId String     @unique
+    items  CartItem[]
+}
+
+model CartItem {
+    id        String   @id @default(uuid())
+    product   Product  @relation(fields: [productId], references: [id])
+    productId String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    cart      Cart     @relation(fields: [cartId], references: [id])
+    cartId    String
 }
 
 enum Status {
