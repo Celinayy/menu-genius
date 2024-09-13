@@ -182,6 +182,7 @@ const HeaderComponent = () => {
                     cursor: "pointer",
                     alignContent: "center",
                   }}
+                  onClick={() => router.push("/")}
                 >
                   MenuGeniusLOGO
                 </Typography>

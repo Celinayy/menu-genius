@@ -4,62 +4,58 @@ import {
   FindProductPayloadSchema,
   ListProductPayloadSchema,
 } from "./product.schema";
-import { router } from "@/trpc/server";
+import { procedure, router } from "@/trpc/server";
 
 export const productRouter = router({
-  list: protectedProcedure
-    .input(ListProductPayloadSchema)
-    .query(async (opts) => {
-      return await prisma.product.findMany({
-        where: {
-          name: {
-            contains: opts.input.search?.name,
-            mode: "insensitive",
-          },
-          ingredients:
-            opts.input.ingredientIds.length > 0
-              ? {
-                  some: {
-                    id: {
-                      in: opts.input.ingredientIds,
-                    },
+  list: procedure.input(ListProductPayloadSchema).query(async (opts) => {
+    return await prisma.product.findMany({
+      where: {
+        name: {
+          contains: opts.input.search?.name,
+          mode: "insensitive",
+        },
+        ingredients:
+          opts.input.ingredientIds.length > 0
+            ? {
+                some: {
+                  id: {
+                    in: opts.input.ingredientIds,
                   },
-                }
-              : undefined,
-          allergens:
-            opts.input.allergenIds.length > 0
-              ? {
-                  some: {
-                    id: {
-                      in: opts.input.allergenIds,
-                    },
+                },
+              }
+            : undefined,
+        allergens:
+          opts.input.allergenIds.length > 0
+            ? {
+                some: {
+                  id: {
+                    in: opts.input.allergenIds,
                   },
-                }
-              : undefined,
-        },
+                },
+              }
+            : undefined,
+      },
 
-        include: {
-          image: true,
-          ingredients: true,
-          allergens: true,
-          favorites: true,
-        },
-      });
-    }),
+      include: {
+        image: true,
+        ingredients: true,
+        allergens: true,
+        favorites: true,
+      },
+    });
+  }),
 
-  find: protectedProcedure
-    .input(FindProductPayloadSchema)
-    .query(async (opts) => {
-      return await prisma.product.findUniqueOrThrow({
-        where: {
-          id: opts.input.productId,
-        },
-        include: {
-          image: true,
-          ingredients: true,
-          allergens: true,
-          favorites: true,
-        },
-      });
-    }),
+  find: procedure.input(FindProductPayloadSchema).query(async (opts) => {
+    return await prisma.product.findUniqueOrThrow({
+      where: {
+        id: opts.input.productId,
+      },
+      include: {
+        image: true,
+        ingredients: true,
+        allergens: true,
+        favorites: true,
+      },
+    });
+  }),
 });
