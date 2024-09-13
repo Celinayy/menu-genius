@@ -12,7 +12,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useSnackbar } from "notistack";
 import { useState } from "react";
 
 const ProductsPage = () => {
