@@ -2,6 +2,7 @@ import HeaderComponent from "@/components/HeaderComponent";
 import { trpc } from "@/trpc/client";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CircularProgress,
@@ -12,13 +13,18 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import Moment from "moment";
+import DeleteReservationDialog from "@/components/DeleteReservationDialog";
+import { useState } from "react";
 
 const SingleReservationPage = () => {
   const router = useRouter();
   const reservationId = router.query.reservationId as string;
-  const { data: reservation } = trpc.reservation.find.useQuery({
+  const { data: reservation, isLoading } = trpc.reservation.find.useQuery({
     reservationId,
   });
+
+  const [openDeleteReservationDialog, setOpenDeleteReservationDialog] =
+    useState(false);
 
   if (!reservation) {
     return (
@@ -64,7 +70,21 @@ const SingleReservationPage = () => {
               <Typography textAlign={"center"}>
                 {reservation.comment}
               </Typography>
+              <Button
+                fullWidth
+                color="secondary"
+                variant="contained"
+                disabled={isLoading}
+                onClick={() => setOpenDeleteReservationDialog(true)}
+              >
+                Foglalás törlése
+              </Button>
             </Stack>
+            <DeleteReservationDialog
+              reservation={reservation}
+              open={openDeleteReservationDialog}
+              onClose={() => setOpenDeleteReservationDialog(false)}
+            />
           </CardContent>
         </Card>
       </Stack>
