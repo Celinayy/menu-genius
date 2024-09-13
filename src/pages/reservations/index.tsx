@@ -31,9 +31,9 @@ const ReservationsPage = () => {
         <Button
           fullWidth
           variant="contained"
-          onClick={() => router.push("/products")}
+          onClick={() => router.push("/reservations/create")}
         >
-          Irány a kínálat!
+          Foglalás létrehozása
         </Button>
       </Container>
     );
