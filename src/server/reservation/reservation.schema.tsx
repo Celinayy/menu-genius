@@ -2,10 +2,9 @@ import { z } from "zod";
 
 export const CreateReservationPayloadSchema = z
   .object({
-    userId: z.string().uuid(),
     name: z.string(),
     phone: z.string(),
-    numberOfGuests: z.number(),
+    numberOfGuests: z.number().min(1).max(10),
     comment: z.string(),
     checkInDate: z.date(),
     checkOutDate: z.date().optional(),
