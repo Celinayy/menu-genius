@@ -6,11 +6,25 @@ import {
 } from "./reservation.schema";
 import { prisma } from "../db/db.client";
 import { reservationProcedure } from "./reservation.procedure";
+import { DeskService } from "../desk/desk.service";
+import moment from "moment";
+
+const deskService = new DeskService();
 
 export const reservationRouter = router({
   create: protectedProcedure
     .input(CreateReservationPayloadSchema)
     .mutation(async (opts) => {
+      const desk = await deskService.findFree({
+        from: opts.input.checkInDate,
+        to: opts.input.checkOutDate
+          ? opts.input.checkOutDate
+          : moment(opts.input.checkInDate).endOf("date").toDate(),
+        capacity: opts.input.numberOfGuests,
+      });
+      if (!desk) {
+        throw new Error("A kívánt időben nincs szabad asztal!");
+      }
       const reservation = await prisma.reservation.create({
         data: {
           userId: opts.ctx.user.id,
@@ -20,6 +34,7 @@ export const reservationRouter = router({
           numberOfGuests: opts.input.numberOfGuests,
           checkInDate: opts.input.checkInDate,
           checkOutDate: opts.input.checkOutDate,
+          deskId: desk.id,
         },
       });
       return {
@@ -32,6 +47,9 @@ export const reservationRouter = router({
     return await prisma.reservation.findMany({
       where: {
         userId: opts.ctx.user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
   }),

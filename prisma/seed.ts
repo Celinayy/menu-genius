@@ -4,6 +4,7 @@ import { faker } from "@faker-js/faker";
 import { boolean, nullable } from "zod";
 import slugify from "slugify";
 import { taintUniqueValue } from "next/dist/server/app-render/rsc/taint";
+import moment from "moment";
 
 export const seed = async () => {
   console.log("[SEEDER] Starting seed...");
@@ -16,27 +17,64 @@ export const seed = async () => {
     },
   });
 
-  const reservations = await prisma.reservation.createManyAndReturn({
+  const desks = await prisma.desk.createManyAndReturn({
     data: Array.from(
       {
-        length: faker.number.int({
-          min: 1,
-          max: 5,
-        }),
+        length: faker.number.int({ min: 5, max: 10 }),
       },
       () => ({
-        userId: user.id,
-        comment: faker.lorem.sentence({
-          min: 4,
-          max: 10,
-        }),
-        name: user.name,
-        numberOfGuests: faker.number.int({
+        capacity: faker.number.int({
           min: 1,
           max: 10,
         }),
-        phone: user.phone ?? faker.phone.number(),
       })
+    ),
+  });
+
+  const reservations = await prisma.reservation.createManyAndReturn({
+    data: desks.flatMap((desk) =>
+      Array.from(
+        {
+          length: faker.number.int({
+            min: 1,
+            max: 5,
+          }),
+        },
+        (_, index) => {
+          const checkInDate = moment()
+            .set("hours", 18)
+            .startOf("hours")
+            .add(index, "day")
+            .toDate();
+
+          const checkOutDate = moment(checkInDate)
+            .add(
+              faker.number.int({
+                min: 1,
+                max: 6,
+              }),
+              "hours"
+            )
+            .toDate();
+
+          return {
+            userId: user.id,
+            name: user.name,
+            phone: user.phone ?? faker.phone.number(),
+            deskId: desk.id,
+            numberOfGuests: faker.number.int({
+              min: 1,
+              max: desk.capacity,
+            }),
+            comment: faker.lorem.sentence({
+              min: 4,
+              max: 10,
+            }),
+            checkInDate,
+            checkOutDate,
+          };
+        }
+      )
     ),
   });
 
