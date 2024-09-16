@@ -27,6 +27,7 @@ export const seed = async () => {
           min: 1,
           max: 10,
         }),
+        name: faker.animal.dog(),
       })
     ),
   });

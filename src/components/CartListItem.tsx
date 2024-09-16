@@ -14,6 +14,7 @@ import NextImage from "next/image";
 import { useState } from "react";
 import DeleteCartItemDialog from "./DeleteCartItemDialog";
 import { useRouter } from "next/router";
+import color from "color";
 
 export type CartListItemProps = CardProps & {
   cartItem: CartItem & {
@@ -27,12 +28,18 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const router = useRouter();
 
+  const isFood = cartItem.product.isFood;
+
   return (
     <Card
       variant={"outlined"}
       key={`cartItem-product-list-item-${cartItem.product.id}`}
       sx={(theme) => ({
-        padding: "8px",
+        backgroundColor: color(
+          isFood ? `${theme.palette.primary.main}` : "lightblue"
+        )
+          .alpha(0.4)
+          .toString(),
       })}
     >
       <CardContent>
