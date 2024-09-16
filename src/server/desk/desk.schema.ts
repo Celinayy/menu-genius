@@ -9,3 +9,7 @@ export const FindFreeDeskPayloadSchema = z.object({
 export type FindFreeDeskPayloadType = z.infer<typeof FindFreeDeskPayloadSchema>;
 
 export const ListDeskPayloadSchema = z.object({});
+
+export const FindDeskPayloadSchema = z.object({
+  deskId: z.string().uuid(),
+});
