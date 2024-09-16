@@ -1,4 +1,5 @@
 import { NumberField } from "@/components/NumberField";
+import { CreateReservationPayloadSchema } from "@/server/reservation/reservation.schema";
 import { trpc } from "@/trpc/client";
 import {
   Box,
@@ -40,6 +41,14 @@ const CreateReservationPage = () => {
   const [numberOfGuests, setNumberOfGuests] = useState(0);
   const [date, setDate] = useState<Moment | null>(null);
   const [comment, setComment] = useState("");
+
+  const { success, data } = CreateReservationPayloadSchema.safeParse({
+    name: name,
+    phone: phone,
+    numberOfGuests: numberOfGuests,
+    comment: comment,
+    checkInDate: date?.toDate(),
+  });
 
   return (
     <Container>
@@ -93,16 +102,8 @@ const CreateReservationPage = () => {
                 <Button
                   fullWidth
                   variant="contained"
-                  disabled={isLoading || !date}
-                  onClick={() =>
-                    mutate({
-                      name: name,
-                      phone: phone,
-                      numberOfGuests: numberOfGuests,
-                      comment: comment,
-                      checkInDate: date!.toDate(),
-                    })
-                  }
+                  disabled={isLoading || !success}
+                  onClick={() => mutate(data!)}
                 >
                   Foglalás létrehozása
                 </Button>

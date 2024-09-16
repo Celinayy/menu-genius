@@ -6,7 +6,7 @@ export const CreateReservationPayloadSchema = z
     phone: z.string(),
     numberOfGuests: z.number().min(1).max(10),
     comment: z.string(),
-    checkInDate: z.date(),
+    checkInDate: z.date().min(new Date()),
     checkOutDate: z.date().optional(),
   })
   .refine(
