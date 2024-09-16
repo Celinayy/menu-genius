@@ -11,6 +11,9 @@ import {
 import { Reservation } from "@prisma/client";
 import { useRouter } from "next/router";
 import Moment from "moment";
+import { useMemo } from "react";
+import moment from "moment";
+import color from "color";
 
 export type ReservationListCardProps = {
   reservation: Reservation;
@@ -18,9 +21,32 @@ export type ReservationListCardProps = {
 
 const ReservationListCard = ({ reservation }: ReservationListCardProps) => {
   const router = useRouter();
+
+  const status = useMemo(() => {
+    if (moment(reservation.checkInDate).isSame(moment(), "date")) {
+      return "TODAY";
+    } else if (moment(reservation.checkInDate).isBefore(moment(), "date")) {
+      return "EXPIRED";
+    } else {
+      return "UPCOMING";
+    }
+  }, [reservation.checkInDate]);
+
   return (
     <Card>
-      <CardContent>
+      <CardContent
+        sx={(theme) => ({
+          backgroundColor: color(
+            status === "TODAY"
+              ? theme.palette.warning.main
+              : status === "EXPIRED"
+              ? theme.palette.error.main
+              : theme.palette.success.main
+          )
+            .alpha(0.4)
+            .toString(),
+        })}
+      >
         <Stack direction={"column"} spacing={2}>
           <Stack
             direction={"row"}
