@@ -13,7 +13,7 @@ import {
 import { Image, Product } from "@prisma/client";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
-import { useSnackbar } from "notistack";
+import { FavoriteIconButton } from "./FavoriteIconButton";
 
 export type ProductListItemProps = {
   product: Product & {
@@ -25,20 +25,6 @@ const ProductListItem = ({ product }: ProductListItemProps) => {
   const router = useRouter();
 
   const { data: user } = trpc.user.find.useQuery();
-
-  const { enqueueSnackbar } = useSnackbar();
-  const { mutate, isLoading } = trpc.favoritProduct.create.useMutation({
-    onSuccess: () => {
-      enqueueSnackbar("Sikeres kedvencekhez adás!", {
-        variant: "success",
-      });
-    },
-    onError: (error) => {
-      enqueueSnackbar(error.message, {
-        variant: "error",
-      });
-    },
-  });
 
   if (user) {
     return (
@@ -65,15 +51,8 @@ const ProductListItem = ({ product }: ProductListItemProps) => {
               <Typography>{product.price} EUR</Typography>
             </Stack>
             <Stack direction={"row"} spacing={1}>
-              <IconButton
-                onClick={() =>
-                  mutate({
-                    productId: product.id,
-                  })
-                }
-              >
-                <StarRounded />
-              </IconButton>
+              <FavoriteIconButton product={product} />
+
               <Button
                 variant="contained"
                 onClick={() => router.push(`/products/${product.id}/`)}
@@ -91,9 +70,9 @@ const ProductListItem = ({ product }: ProductListItemProps) => {
     <Card
       variant={"outlined"}
       key={`product-list-item-${product.id}`}
-      sx={(theme) => ({
+      sx={{
         padding: "8px",
-      })}
+      }}
     >
       <CardContent>
         <Box display={"flex"} justifyContent={"center"}>

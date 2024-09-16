@@ -5,7 +5,6 @@ import ProductSearchTextField from "@/components/ProductSearchTextField";
 import { trpc } from "@/trpc/client";
 import {
   Box,
-  Card,
   Container,
   Divider,
   Grid2 as Grid,

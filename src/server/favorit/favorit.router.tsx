@@ -44,7 +44,10 @@ export const favoritProductRouter = router({
     .mutation(async (opts) => {
       return await prisma.favorite.delete({
         where: {
-          id: opts.ctx.favoritProduct.id,
+          productId_userId: {
+            productId: opts.ctx.favoritProduct.productId,
+            userId: opts.ctx.favoritProduct.userId,
+          },
         },
       });
     }),
