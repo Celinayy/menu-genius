@@ -49,15 +49,7 @@ const FavoritesPage = () => {
       <Grid container spacing={2}>
         {data?.map((favorit) => (
           <Grid size={{ xs: 12, md: 4 }}>
-            <Card
-              variant={"outlined"}
-              key={`favorite-list-item-${favorit.id}`}
-              sx={(theme) => ({
-                padding: "8px",
-              })}
-            >
-              <FavoritProductListItem favorit={favorit} />
-            </Card>
+            <FavoritProductListItem favorit={favorit} />
           </Grid>
         ))}
       </Grid>

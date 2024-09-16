@@ -44,8 +44,13 @@ model Reservation {
 model Desk {
     id String @id @default(uuid())
 
-    name     String
-    capacity Int
+    name        String
+    capacity    Int
+    description String
+    rating      Int
+
+    image   Image  @relation(fields: [imageId], references: [id])
+    imageId String @unique
 
     reservations Reservation[]
 }
@@ -58,6 +63,7 @@ model Image {
     width   Int
     height  Int
     product Product?
+    desk    Desk?
 }
 
 model Ingredient {

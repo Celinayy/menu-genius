@@ -11,6 +11,7 @@ import {
   ShoppingCart,
   StarOutline,
   StarRounded,
+  TableRestaurantRounded,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -168,6 +169,13 @@ const HeaderComponent = () => {
                   >
                     <Typography>Kedvenek</Typography>
                     <StarRounded />
+                  </MenuItem>
+                  <MenuItem
+                    sx={{ justifyContent: "space-between" }}
+                    onClick={() => router.push("/desks")}
+                  >
+                    <Typography>Asztalok</Typography>
+                    <TableRestaurantRounded />
                   </MenuItem>
                   <MenuItem
                     sx={{ justifyContent: "space-between" }}

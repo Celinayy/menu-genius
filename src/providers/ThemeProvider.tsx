@@ -67,6 +67,16 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
               }),
             },
           },
+          MuiCardContent: {
+            styleOverrides: {
+              root: {
+                padding: 12,
+                "&:last-child": {
+                  paddingBottom: 12,
+                },
+              },
+            },
+          },
           MuiChip: {
             styleOverrides: {
               root: ({ theme }) => ({

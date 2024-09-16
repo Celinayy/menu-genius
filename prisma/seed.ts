@@ -17,20 +17,39 @@ export const seed = async () => {
     },
   });
 
-  const desks = await prisma.desk.createManyAndReturn({
-    data: Array.from(
+  const desks = await prisma.$transaction(
+    Array.from(
       {
-        length: faker.number.int({ min: 5, max: 10 }),
+        length: faker.number.int({ min: 9, max: 21 }),
       },
-      () => ({
-        capacity: faker.number.int({
-          min: 1,
-          max: 10,
-        }),
-        name: faker.animal.dog(),
-      })
-    ),
-  });
+      () => {
+        const name = faker.animal.dog();
+
+        return prisma.desk.create({
+          data: {
+            capacity: faker.number.int({
+              min: 1,
+              max: 10,
+            }),
+            name,
+            description: faker.lorem.paragraph(),
+            rating: faker.number.int({
+              min: 1,
+              max: 10,
+            }),
+            image: {
+              create: {
+                name: `${slugify(name)}.svg`,
+                data: faker.image.dataUri({ height: 256, width: 256 }),
+                height: 256,
+                width: 256,
+              },
+            },
+          },
+        });
+      }
+    )
+  );
 
   const reservations = await prisma.reservation.createManyAndReturn({
     data: desks.flatMap((desk) =>
