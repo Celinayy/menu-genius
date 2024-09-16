@@ -21,12 +21,32 @@ model Category {
     name String
 }
 
+model Reservation {
+    id String @id @default(uuid())
+
+    createdAt DateTime @default(now())
+
+    name           String
+    phone          String
+    numberOfGuests Int
+    comment        String
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String
+
+    desk   Desk   @relation(fields: [deskId], references: [id])
+    deskId String
+
+    checkInDate  DateTime  @default(now()) @map("check_in_date")
+    checkOutDate DateTime? @map("check_out_date")
+}
+
 model Desk {
     id String @id @default(uuid())
 
-    numberOfSeats Int
+    capacity Int
 
-    purchases Purchase[]
+    reservations Reservation[]
 }
 
 model Image {
@@ -73,37 +93,6 @@ model Favorite {
     @@unique([productId, userId])
 }
 
-model Purchase {
-    id       String @id @default(uuid())
-    totalPay Int
-
-    status Status @default(ORDERED)
-
-    deskId String
-    userId String
-
-    user User @relation(fields: [userId], references: [id])
-    desk Desk @relation(fields: [deskId], references: [id])
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
-
-model Reservation {
-    id String @id @default(uuid())
-
-    name           String
-    phone          String
-    numberOfGuests Int
-    comment        String
-
-    user   User   @relation(fields: [userId], references: [id])
-    userId String
-
-    checkInDate  DateTime  @default(now()) @map("check_in_date")
-    checkOutDate DateTime? @map("check_out_date")
-}
-
 model User {
     id          String      @id @default(uuid())
     name        String
@@ -117,7 +106,6 @@ model User {
     updatedAt DateTime @updatedAt
 
     reservations Reservation[]
-    purchases    Purchase[]
     favorites    Favorite[]
     cart         Cart?
 }
