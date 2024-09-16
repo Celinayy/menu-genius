@@ -13,6 +13,9 @@ export const deskRouter = router({
       where: {
         id: opts.input.deskId,
       },
+      include: {
+        image: true,
+      },
     });
   }),
 });

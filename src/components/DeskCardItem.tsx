@@ -2,7 +2,9 @@ import { OpenInNewRounded } from "@mui/icons-material";
 import {
   Card,
   CardContent,
+  Divider,
   IconButton,
+  Rating,
   Stack,
   Typography,
 } from "@mui/material";
@@ -26,7 +28,11 @@ const DeskCardItem = ({ desk }: DeskCardItemProps) => {
               <OpenInNewRounded color="primary" />
             </IconButton>
           </Stack>
-          <Typography>Helyek száma: {desk.capacity}</Typography>
+          <Divider />
+          <Stack direction={"row"} justifyContent={"space-between"}>
+            <Typography>Helyek száma: {desk.capacity}</Typography>
+            <Rating max={10} size="medium" value={desk?.rating} readOnly />
+          </Stack>
         </Stack>
       </CardContent>
     </Card>
