@@ -18,6 +18,7 @@ import {
   brown,
   blue,
 } from "@mui/material/colors";
+import { BorderStyle } from "@mui/icons-material";
 
 export type ThemeProviderProps = PropsWithChildren;
 
@@ -75,6 +76,17 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
                   paddingBottom: 12,
                 },
               },
+            },
+          },
+          MuiIconButton: {
+            styleOverrides: {
+              root: ({ theme }) => ({
+                "&:hover": {
+                  backgroundColor: color(theme.palette.background.paper)
+                    .alpha(0)
+                    .toString(),
+                },
+              }),
             },
           },
           MuiChip: {

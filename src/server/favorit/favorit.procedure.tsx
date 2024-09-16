@@ -7,7 +7,10 @@ export const favoritProductProcedure = protectedProcedure
   .use(async (opts) => {
     const favoritProduct = await prisma.favorite.findUniqueOrThrow({
       where: {
-        id: opts.input.productId,
+        productId_userId: {
+          userId: opts.ctx.user.id,
+          productId: opts.input.productId,
+        },
       },
     });
 

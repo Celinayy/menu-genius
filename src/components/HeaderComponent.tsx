@@ -1,15 +1,11 @@
 import { trpc } from "@/trpc/client";
 import {
-  CalendarMonthOutlined,
   CalendarMonthRounded,
   LogoutOutlined,
-  MarkEmailUnreadRounded,
   MenuOutlined,
-  ProductionQuantityLimitsRounded,
   RestaurantOutlined,
   SettingsRounded,
   ShoppingCart,
-  StarOutline,
   StarRounded,
   TableRestaurantRounded,
 } from "@mui/icons-material";
