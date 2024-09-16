@@ -20,7 +20,7 @@ export const seed = async () => {
   const desks = await prisma.desk.createManyAndReturn({
     data: Array.from(
       {
-        length: faker.number.int({ min: 5, max: 10 }),
+        length: faker.number.int({ min: 9, max: 21 }),
       },
       () => ({
         capacity: faker.number.int({

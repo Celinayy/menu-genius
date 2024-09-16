@@ -1,9 +1,9 @@
 import { router } from "@/trpc/server";
-import { productProcedure } from "../product/product.procedure";
 import { prisma } from "../db/db.client";
+import { protectedProcedure } from "../auth/auth.procedure";
 
 export const deskRouter = router({
-  list: productProcedure.query(async () => {
+  list: protectedProcedure.query(async () => {
     return await prisma.desk.findMany({});
   }),
 });

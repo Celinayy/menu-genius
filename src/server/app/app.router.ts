@@ -9,6 +9,7 @@ import { cartRouter } from "../cart/cart.router";
 import { cartItemRouter } from "../cartItem/cartItem.router";
 import { favoritProductRouter } from "../favorit/favorit.router";
 import { reservationRouter } from "../reservation/reservation.router";
+import { deskRouter } from "../desk/desk.router";
 
 export const appRouter = router({
   auth: authRouter,
@@ -20,6 +21,7 @@ export const appRouter = router({
   cartItem: cartItemRouter,
   favoritProduct: favoritProductRouter,
   reservation: reservationRouter,
+  desk: deskRouter,
 });
 
 export type AppRouter = typeof appRouter;
