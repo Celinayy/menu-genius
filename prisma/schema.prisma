@@ -44,6 +44,7 @@ model Reservation {
 model Desk {
     id String @id @default(uuid())
 
+    name     String
     capacity Int
 
     reservations Reservation[]
