@@ -48,7 +48,10 @@ const FavoritesPage = () => {
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
       <Grid container spacing={2}>
         {data?.map((favorit) => (
-          <Grid size={{ xs: 12, md: 4 }}>
+          <Grid
+            size={{ xs: 12, md: 4 }}
+            key={`favorite-product-list-item-${favorit.productId}`}
+          >
             <FavoritProductListItem favorit={favorit} />
           </Grid>
         ))}

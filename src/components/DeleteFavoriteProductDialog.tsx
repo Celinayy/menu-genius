@@ -12,9 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Favorite, Product } from "@prisma/client";
-import router from "next/router";
 import { useSnackbar } from "notistack";
-import HeaderComponent from "./HeaderComponent";
 
 export type DeleteFavoriteProductDialogProps = DialogProps & {
   favorit: Favorite & {
@@ -64,11 +62,12 @@ const DeleteFavoriteProductDialog = ({
             {favorit.product.name}
           </Typography>
           <Button
+            disabled={isLoading}
             variant="contained"
             color="secondary"
             onClick={() =>
               mutate({
-                productId: favorit.id,
+                productId: favorit.product.id,
               })
             }
           >

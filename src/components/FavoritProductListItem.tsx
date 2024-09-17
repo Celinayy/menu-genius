@@ -30,7 +30,7 @@ const FavoritProductListItem = ({ favorit }: FavoritProductListItemProps) => {
   return (
     <Card
       variant={"outlined"}
-      key={`favorite-list-item-${favorit.id}`}
+      key={`favorite-list-item-${favorit.product.id}`}
       sx={{
         padding: "8px",
       }}
