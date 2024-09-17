@@ -41,8 +41,8 @@ const FavoritProductListItem = ({ favorit }: FavoritProductListItemProps) => {
           alignItems={"center"}
           justifyContent={"space-between"}
         >
-          <Typography variant="h5">{favorit.product.name}</Typography>
-          <Typography variant="overline" sx={{ fontSize: "18px" }}>
+          <Typography variant="h6">{favorit.product.name}</Typography>
+          <Typography variant="overline" sx={{ fontSize: "16px" }}>
             {favorit.product.price} EUR
           </Typography>
         </Stack>
