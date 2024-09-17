@@ -15,6 +15,7 @@ import { useState } from "react";
 import DeleteCartItemDialog from "./DeleteCartItemDialog";
 import { useRouter } from "next/router";
 import color from "color";
+import { FavoriteIconButton } from "./FavoriteIconButton";
 
 export type CartListItemProps = CardProps & {
   cartItem: CartItem & {
@@ -51,6 +52,7 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
           <Typography variant="h5" sx={{}}>
             {cartItem.product.name}
           </Typography>
+
           <Typography variant="overline" sx={{ fontSize: "18px" }}>
             {cartItem.product.price} EUR
           </Typography>

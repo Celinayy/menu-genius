@@ -16,6 +16,7 @@ import {
 import { useRouter } from "next/router";
 import NextImage from "next/image";
 import { useSnackbar } from "notistack";
+import { FavoriteIconButton } from "@/components/FavoriteIconButton";
 
 const SingleProductPage = () => {
   const router = useRouter();
@@ -62,9 +63,9 @@ const SingleProductPage = () => {
         <Grid container spacing={2}>
           <Grid size={{ xs: 12, md: 6 }}>
             <Card
-              sx={(theme) => ({
+              sx={{
                 padding: "8px",
-              })}
+              }}
             >
               <Box display={"flex"} justifyContent={"center"}>
                 <Typography variant="caption" sx={{ fontSize: "24px" }}>
@@ -97,10 +98,15 @@ const SingleProductPage = () => {
               <Divider sx={{ marginBottom: "12px", marginTop: "12px" }} />
               <CardContent>
                 <Stack spacing={2} direction={"column"}>
-                  <Typography variant="overline">Allergének</Typography>
+                  <Stack direction={"row"} justifyContent={"space-between"}>
+                    <Typography variant="overline">Allergének</Typography>
+                    <Stack direction={"row"}>
+                      <FavoriteIconButton product={product} />
+                    </Stack>
+                  </Stack>
                   <Stack direction={"row"} spacing={1}>
                     {product.allergens.map((allergen) => (
-                      <Stack direction={"row"} justifyContent={"space-between"}>
+                      <Stack direction={"row"}>
                         <Chip
                           label={allergen.name}
                           onClick={() =>
