@@ -37,7 +37,7 @@ const SingleDeskPage = () => {
     <Container>
       <Box display={"flex"} justifyContent={"center"}>
         <Typography variant="caption" sx={{ fontSize: "36px" }}>
-          {DeskTwoTone.name} asztal részletei
+          {desk.name} asztal részletei
         </Typography>
       </Box>
       <Divider sx={{ marginBottom: "36px", marginTop: "12px" }} />
