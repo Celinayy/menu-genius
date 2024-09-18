@@ -1,4 +1,5 @@
 import DeskCardItem from "@/components/DeskCardItem";
+import LoadingPage from "@/components/LoadingPage";
 import { trpc } from "@/trpc/client";
 import {
   Grid2 as Grid,

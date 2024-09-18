@@ -1,3 +1,4 @@
+import LoadingPage from "@/components/LoadingPage";
 import { NumberField } from "@/components/NumberField";
 import { CreateReservationPayloadSchema } from "@/server/reservation/reservation.schema";
 import { trpc } from "@/trpc/client";

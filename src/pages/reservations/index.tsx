@@ -1,4 +1,5 @@
 import HeaderComponent from "@/components/HeaderComponent";
+import LoadingPage from "@/components/LoadingPage";
 import ReservationListCard from "@/components/ReservationListCard";
 import { withAuthentication } from "@/hoc/WithAuthentication";
 import { userRouter } from "@/server/user/user.router";

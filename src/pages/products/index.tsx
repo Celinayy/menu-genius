@@ -1,5 +1,6 @@
 import HeaderComponent from "@/components/HeaderComponent";
 import IngredientSelect from "@/components/IngredientSelect";
+import LoadingPage from "@/components/LoadingPage";
 import ProductListItem from "@/components/ProductListItem";
 import ProductSearchTextField from "@/components/ProductSearchTextField";
 import { trpc } from "@/trpc/client";
