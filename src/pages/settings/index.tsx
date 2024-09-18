@@ -20,6 +20,7 @@ import {
 import { User, PaletteMode } from "@prisma/client";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
+import LoadingPage from "@/components/LoadingPage";
 
 export type SettingsPageProps = {
   user: User;
@@ -92,6 +93,10 @@ const SettingsPage = ({ user }: SettingsPageProps) => {
       value: "PURPLE",
     },
   ];
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <Container>

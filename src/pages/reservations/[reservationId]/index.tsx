@@ -16,6 +16,7 @@ import Moment from "moment";
 import DeleteReservationDialog from "@/components/DeleteReservationDialog";
 import { useState } from "react";
 import { withAuthentication } from "@/hoc/WithAuthentication";
+import LoadingPage from "@/components/LoadingPage";
 
 const SingleReservationPage = () => {
   const router = useRouter();
@@ -26,6 +27,10 @@ const SingleReservationPage = () => {
 
   const [openDeleteReservationDialog, setOpenDeleteReservationDialog] =
     useState(false);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   if (!reservation) {
     return (

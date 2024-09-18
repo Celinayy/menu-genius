@@ -1,5 +1,6 @@
 import CartListItem from "@/components/CartListItem";
 import HeaderComponent from "@/components/HeaderComponent";
+import LoadingPage from "@/components/LoadingPage";
 import { withAuthentication } from "@/hoc/WithAuthentication";
 import { trpc } from "@/trpc/client";
 import {
@@ -26,7 +27,9 @@ const CartPage = () => {
 
   const totalPrice = data?.reduce((prev, cur) => prev + cur.product.price, 0);
 
-  console.log(data?.length);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   if (data?.length === 0) {
     return (

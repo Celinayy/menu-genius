@@ -18,12 +18,16 @@ const ProductsPage = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data } = trpc.product.list.useQuery({
+  const { data, isLoading } = trpc.product.list.useQuery({
     ingredientIds,
     search: {
       name: searchTerm,
     },
   });
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <Container>

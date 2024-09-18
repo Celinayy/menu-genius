@@ -1,5 +1,6 @@
 import FavoritProductListItem from "@/components/FavoritProductListItem";
 import HeaderComponent from "@/components/HeaderComponent";
+import LoadingPage from "@/components/LoadingPage";
 import { withAuthentication } from "@/hoc/WithAuthentication";
 import { trpc } from "@/trpc/client";
 import {
@@ -14,9 +15,13 @@ import {
 import { useRouter } from "next/router";
 
 const FavoritesPage = () => {
-  const { data } = trpc.favoritProduct.list.useQuery();
+  const { data, isLoading } = trpc.favoritProduct.list.useQuery();
 
   const router = useRouter();
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   if (data?.length === 0) {
     return (

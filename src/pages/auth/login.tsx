@@ -13,6 +13,7 @@ import { trpc } from "@/trpc/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import HeaderComponent from "@/components/HeaderComponent";
+import LoadingPage from "@/components/LoadingPage";
 
 const LoginPage = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -36,16 +37,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   if (isLoading) {
-    return (
-      <Container data-testid="group-list-loader">
-        <Box>
-          <Stack direction={"column"} spacing={2} sx={{ alignItems: "center" }}>
-            <Typography>Az oldal töltődik</Typography>
-            <CircularProgress />
-          </Stack>
-        </Box>
-      </Container>
-    );
+    return <LoadingPage />;
   }
 
   return (

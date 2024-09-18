@@ -1,4 +1,5 @@
 import HeaderComponent from "@/components/HeaderComponent";
+import LoadingPage from "@/components/LoadingPage";
 import { trpc } from "@/trpc/client";
 import {
   Box,
@@ -35,16 +36,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
 
   if (isLoading) {
-    return (
-      <Container data-testid="group-list-loader">
-        <Box>
-          <Stack direction={"column"} spacing={2} sx={{ alignItems: "center" }}>
-            <Typography>Az oldal töltődik</Typography>
-            <CircularProgress />
-          </Stack>
-        </Box>
-      </Container>
-    );
+    return <LoadingPage />;
   }
 
   return (
