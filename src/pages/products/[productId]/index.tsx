@@ -93,9 +93,9 @@ const SingleProductPage = () => {
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
             <Card
-              sx={(theme) => ({
+              sx={{
                 padding: "8px",
-              })}
+              }}
             >
               <Box display={"flex"} justifyContent={"center"}>
                 <Typography variant="caption" sx={{ fontSize: "24px" }}>

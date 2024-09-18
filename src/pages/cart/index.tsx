@@ -1,5 +1,5 @@
 import CartListItem from "@/components/CartListItem";
-import HeaderComponent from "@/components/HeaderComponent";
+import DeleteCartDialog from "@/components/DeleteCartDialog";
 import LoadingPage from "@/components/LoadingPage";
 import { withAuthentication } from "@/hoc/WithAuthentication";
 import { trpc } from "@/trpc/client";
@@ -15,10 +15,14 @@ import {
   Button,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const CartPage = () => {
   const router = useRouter();
+
   const { data, isLoading } = trpc.cartItem.list.useQuery();
+
+  const [open, setOpen] = useState(false);
 
   const totalQuantityDish =
     data?.filter((cartItem) => cartItem.product.isFood).length ?? 0;
@@ -90,7 +94,16 @@ const CartPage = () => {
                 <Button disabled={isLoading} variant="contained">
                   Fizetés
                 </Button>
+                <Button
+                  disabled={isLoading}
+                  onClick={() => setOpen(true)}
+                  variant="contained"
+                  color="error"
+                >
+                  Kosár törlése
+                </Button>
               </Stack>
+              <DeleteCartDialog open={open} onClose={() => setOpen(false)} />
             </CardContent>
           </Card>
         </Grid>

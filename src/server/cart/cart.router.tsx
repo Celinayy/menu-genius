@@ -1,7 +1,10 @@
-import { procedure, router } from "@/trpc/server";
 import { prisma } from "../db/db.client";
 import { protectedProcedure } from "../auth/auth.procedure";
-import { CreateCartPayloadSchema } from "./cart.schema";
+import {
+  CreateCartPayloadSchema,
+  DeleteCartPayloadSchema,
+} from "./cart.schema";
+import { router } from "@/trpc/server";
 
 export const cartRouter = router({
   create: protectedProcedure
@@ -17,5 +20,11 @@ export const cartRouter = router({
         message: "Successfully created cart!",
         cart,
       };
+    }),
+
+  delete: protectedProcedure
+    .input(DeleteCartPayloadSchema)
+    .mutation(async () => {
+      return await prisma.cartItem.deleteMany({});
     }),
 });
