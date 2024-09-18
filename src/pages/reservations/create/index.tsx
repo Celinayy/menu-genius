@@ -50,6 +50,10 @@ const CreateReservationPage = () => {
     checkInDate: date?.toDate(),
   });
 
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <Container>
       <Box display={"flex"} justifyContent={"center"}>

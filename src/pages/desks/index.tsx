@@ -11,6 +11,10 @@ import {
 const DeskListPage = () => {
   const { data, isLoading } = trpc.desk.list.useQuery();
 
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <Container>
       <Box display={"flex"} justifyContent={"center"}>

@@ -17,9 +17,13 @@ import { useRouter } from "next/router";
 import { Fragment } from "react";
 
 const ReservationsPage = () => {
-  const { data } = trpc.reservation.list.useQuery();
+  const { data, isLoading } = trpc.reservation.list.useQuery();
 
   const router = useRouter();
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   if (data?.length === 0) {
     router.push("/reservations/create");

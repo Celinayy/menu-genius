@@ -13,6 +13,7 @@ import {
 import { useRouter } from "next/router";
 import NextImage from "next/image";
 import { trpc } from "@/trpc/client";
+import LoadingPage from "@/components/LoadingPage";
 
 export default function Home() {
   const { data, isLoading } = trpc.product.list.useQuery({});
@@ -22,6 +23,10 @@ export default function Home() {
     ? data[Math.floor(Math.random() * data?.length)]
     : undefined;
   const router = useRouter();
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   if (user) {
     return (

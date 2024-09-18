@@ -17,15 +17,18 @@ import { useRouter } from "next/router";
 import NextImage from "next/image";
 import { useSnackbar } from "notistack";
 import { FavoriteIconButton } from "@/components/FavoriteIconButton";
+import LoadingPage from "@/components/LoadingPage";
 
 const SingleProductPage = () => {
   const router = useRouter();
   const productId = router.query.productId as string;
-  const { data: product } = trpc.product.find.useQuery({ productId });
+  const { data: product, isLoading } = trpc.product.find.useQuery({
+    productId,
+  });
   const { data: user } = trpc.user.find.useQuery();
 
   const { enqueueSnackbar } = useSnackbar();
-  const { mutate, isLoading } = trpc.cartItem.create.useMutation({
+  const { mutate } = trpc.cartItem.create.useMutation({
     onSuccess: () => {
       enqueueSnackbar("Sikeresen hozzáadtad a kosárhoz!", {
         variant: "success",
@@ -37,6 +40,10 @@ const SingleProductPage = () => {
       });
     },
   });
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   if (!product) {
     return (

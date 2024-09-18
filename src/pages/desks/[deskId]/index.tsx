@@ -14,11 +14,16 @@ import {
 import { useRouter } from "next/router";
 import NextImage from "next/image";
 import { DeskTwoTone } from "@mui/icons-material";
+import LoadingPage from "@/components/LoadingPage";
 
 const SingleDeskPage = () => {
   const router = useRouter();
   const deskId = router.query.deskId as string;
-  const { data: desk } = trpc.desk.find.useQuery({ deskId });
+  const { data: desk, isLoading } = trpc.desk.find.useQuery({ deskId });
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   if (!desk) {
     return (
