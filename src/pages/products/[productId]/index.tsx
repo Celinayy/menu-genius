@@ -99,7 +99,7 @@ const SingleProductPage = () => {
             >
               <Box display={"flex"} justifyContent={"center"}>
                 <Typography variant="caption" sx={{ fontSize: "24px" }}>
-                  Részletek
+                  {product.isFood ? "Étel" : "Ital"} részletei
                 </Typography>
               </Box>
               <Divider sx={{ marginBottom: "12px", marginTop: "12px" }} />
